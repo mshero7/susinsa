@@ -111,7 +111,7 @@ public class UserController {
 //		JSONResult result = JSONResult.success(null);
 //
 //       return result;
-//	}
+//	} 
 //	
 //	// 7. 회원 탈퇴
 //	@ApiOperation(value="회원 탈퇴")
