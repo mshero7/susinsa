@@ -23,6 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.cafe24.susinsa.config.AppConfig;
 import com.cafe24.susinsa.config.WebConfig;
+import com.cafe24.susinsa.dto.user.UserLoginDTO;
 import com.cafe24.susinsa.service.UserService;
 import com.cafe24.susinsa.vo.UserVo;
 import com.google.gson.Gson;
@@ -106,7 +107,6 @@ public class UserControllerTest {
 		UserVo vo = new UserVo();
 		
 		// Normal User's Join Data
-
 		resultActions = mockMvc
 			.perform(post("/api/user/join")
 				.param("id", "test@naver.com")
@@ -145,19 +145,25 @@ public class UserControllerTest {
 //			.andExpect(status().isBadRequest());
 	}
 	
-//	// 4. 로그인
-//	@Test
-//	public void testUserLogin() throws Exception {
-//		ResultActions resultActions = mockMvc
-//				.perform(get("/api/user/check/Id").contentType(MediaType.APPLICATION_JSON));
-//		
-//		resultActions.andExpect(status().isOk())
-//		.andDo(print())
-//		.andExpect(jsonPath("$.result", is("success")))
-//		.andExpect(jsonPath("$.data[0].email", is("test")));
-//	}
-//	
-//	// 5. 회원정보 수정
+	// 4. 로그인
+	@Test
+	public void testUserLogin() throws Exception {
+		UserLoginDTO dto = new UserLoginDTO();
+		
+		dto.setClient_id("test@naver.com");
+		dto.setClient_password("test12!@");
+		
+		ResultActions resultActions = 
+				mockMvc
+					.perform(get("/api/user/login")
+					.contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(dto)));
+		
+		resultActions.andExpect(status().isOk())
+		.andDo(print())
+		.andExpect(jsonPath("$.result", is("success")));
+	}
+
+	// 5. 회원정보 수정
 //	@Test
 //	public void testUserUpdateInfo() throws Exception {
 //		ResultActions resultActions = mockMvc
@@ -180,7 +186,7 @@ public class UserControllerTest {
 //		.andExpect(jsonPath("$.result", is("success")))
 //		.andExpect(jsonPath("$.data[0].email", is("test")));
 //	}
-//	
+	
 //	// 7. 로그아웃
 //	// 구현 예정..
 //	@Test

@@ -30,4 +30,11 @@
 			    now());
 		]]>
 	</insert>
+	
+	<select id="login" parameterType="uservo" resultType="int">
+		select count(*)
+		from CLIENT
+	    where client_id= AES_ENCRYPT(#{client_id}, SHA2(#{enc_key}, 512))
+	    and client_password =  AES_ENCRYPT(#{client_password}, SHA2(#{enc_key}, 512));
+	</select>
 </mapper>

@@ -30,4 +30,15 @@
 		 }
 	 ]]>
 	</update>
+	
+	<!-- 정렬된 전체 카테고리 리스트 가져오기 -->
+	<select id="getlist" resultType="categoryvo">
+		SELECT
+		node.category_no,
+		node.category_name AS category_name
+		FROM CATEGORY AS node, CATEGORY AS parent 
+		WHERE node.category_left BETWEEN parent.category_left 
+		AND parent.category_right 
+		GROUP BY node.category_name ORDER BY node.category_left;
+	</select>
 </mapper>

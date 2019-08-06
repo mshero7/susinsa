@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cafe24.susinsa.dto.JSONResult;
 import com.cafe24.susinsa.dto.user.UserCheckDTO;
 import com.cafe24.susinsa.dto.user.UserCheckIdDTO;
+import com.cafe24.susinsa.dto.user.UserLoginDTO;
 import com.cafe24.susinsa.service.UserService;
 import com.cafe24.susinsa.vo.UserVo;
 
@@ -83,18 +85,16 @@ public class UserController {
        return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(results));
 	}
 	
-//	// 4. 로그인 처리
-//	@ApiOperation(value="회원 로그인")
-//	@RequestMapping(value="/login", method=RequestMethod.GET)
-//	public JSONResult login(
-//			@RequestParam(value="id", required=true, defaultValue="") String id,
-//			@RequestParam(value="id", required=true, defaultValue="") String password) {
-//		Boolean exist = userService.existId(id);
-//		JSONResult result = JSONResult.success(exist);
-//
-//       return result;
-//	}
-//	
+	// 4. 로그인 처리
+	@ApiOperation(value="회원 로그인")
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public JSONResult login(@RequestBody UserLoginDTO dto) {
+		Boolean exist = userService.login(dto);
+		JSONResult result = JSONResult.success(exist);
+
+       return result;
+	}
+	
 //	// 5. 회원 정보 수정
 //	@ApiOperation(value="회원 정보 수정")
 //	@RequestMapping(value="/update/{Id}", method=RequestMethod.PUT)

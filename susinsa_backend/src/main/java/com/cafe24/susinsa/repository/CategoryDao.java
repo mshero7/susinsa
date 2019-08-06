@@ -1,5 +1,7 @@
 package com.cafe24.susinsa.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,6 +29,11 @@ public class CategoryDao {
 	public Boolean delete(CategoryVo vo) {
 		sqlSession.delete(NAMESPACE + ".deleteChild",vo);
 		return vo.getResult() == 0;
+	}
+
+	public List<CategoryVo> getList() {
+		List<CategoryVo> list = sqlSession.selectList(NAMESPACE + ".getlist");
+		return list;
 	}
 	
 }

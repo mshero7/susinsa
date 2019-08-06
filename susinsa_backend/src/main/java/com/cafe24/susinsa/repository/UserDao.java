@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.cafe24.susinsa.dto.user.UserCheckDTO;
 import com.cafe24.susinsa.dto.user.UserCheckIdDTO;
+import com.cafe24.susinsa.dto.user.UserLoginDTO;
 import com.cafe24.susinsa.vo.UserVo;
 
 @Repository
@@ -32,6 +33,13 @@ public class UserDao {
 		userVo.setenc_key(ENC_KEY);
 		int result = sqlSession.insert("user.join", userVo);
 		return result > 0;
+	}
+
+	public Boolean login(UserLoginDTO dto) {
+		dto.setEnc_key(ENC_KEY);
+		int result = sqlSession.selectOne("user.login", dto);
+		return result > 0;
+		
 	}
 
 }

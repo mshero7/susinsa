@@ -26,11 +26,12 @@
 		<div class="row">
 
 			<div class="col-lg-3">
-				<h1 class="my-4">PJMall</h1>
+				<h1 class="my-4">SUSINSA</h1>
 				<div class="list-group">
-					<a href="#" class="list-group-item">Category 1</a> <a href="#"
-						class="list-group-item">Category 2</a> <a href="#"
-						class="list-group-item">Category 3</a>
+				<c:forEach items="${category_list}" var="vo" varStatus="status">
+					<a href="#" class="list-group-item" hidden="true">${vo.category_no}</a>
+					<a href="#" class="list-group-item">${vo.category_name}</a>
+				</c:forEach>
 				</div>
 			</div>
 			<!-- /.col-lg-3 -->

@@ -18,7 +18,7 @@ public class GoodsController {
 	@ResponseBody
 	@RequestMapping("/list/{page}")
 	public String list(@PathVariable("page") Integer page) {
-		goodsService.getList();
+//		goodsService.getList();
 		return "ok";
 	}
 }

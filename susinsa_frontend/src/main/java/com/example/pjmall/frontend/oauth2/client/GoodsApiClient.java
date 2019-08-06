@@ -1,14 +1,11 @@
 package com.example.pjmall.frontend.oauth2.client;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Component;
-
 @Component
 public class GoodsApiClient {
-	
-	@Autowired
-	private OAuth2RestTemplate oAuth2RestTemplate;
+//	
+//	@Autowired
+//	private OAuth2RestTemplate oAuth2RestTemplate;
 
 	
 //	private final String API_URL = "http://localhost:8888/v1/hello";
