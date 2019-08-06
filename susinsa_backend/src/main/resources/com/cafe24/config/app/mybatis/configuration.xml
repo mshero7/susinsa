@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="uservo" type="com.cafe24.susinsa.vo.UserVo"/>
+		<typeAlias alias="categoryvo" type="com.cafe24.susinsa.vo.CategoryVo"/>
+		<typeAlias alias="productvo" type="com.cafe24.susinsa.vo.ProductVo"/>
+		<typeAlias alias="productdto" type="com.cafe24.susinsa.dto.product.ProductDTO"/>
+		<typeAlias alias="optvo" type="com.cafe24.susinsa.vo.OptVo"/>
+		<typeAlias alias="optdetailvo" type="com.cafe24.susinsa.vo.OptDetailVo"/>
+		<typeAlias alias="optfulldetailvo" type="com.cafe24.susinsa.vo.OptFullDetailVo"/>
+		<typeAlias alias="imagevo" type="com.cafe24.susinsa.vo.ImageVo"/>
+		<typeAlias alias="shippingvo" type="com.cafe24.susinsa.vo.ShippingVo"/>
+		<typeAlias alias="brandvo" type="com.cafe24.susinsa.vo.BrandVo"/>
+		<typeAlias alias="cartvo" type="com.cafe24.susinsa.vo.CartVo"/>
+		<typeAlias alias="cartdto" type="com.cafe24.susinsa.dto.cart.CartDTO"/>
+    </typeAliases>	
+	<mappers>
+		<mapper resource="com/cafe24/config/app/mybatis/mappers/user.xml" />
+		<mapper resource="com/cafe24/config/app/mybatis/mappers/category.xml"/>
+		<mapper resource="com/cafe24/config/app/mybatis/mappers/product.xml"/>
+		<mapper resource="com/cafe24/config/app/mybatis/mappers/shipping.xml"/>
+		<mapper resource="com/cafe24/config/app/mybatis/mappers/brand.xml"/>
+		<mapper resource="com/cafe24/config/app/mybatis/mappers/cart.xml"/>
+	</mappers>
+</configuration>
