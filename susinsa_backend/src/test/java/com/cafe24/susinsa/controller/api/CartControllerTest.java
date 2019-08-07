@@ -77,7 +77,7 @@ public class CartControllerTest {
 			mockMvc
 			.perform(post("/api/cart/add")
 			.param("cart_count", "4")
-			.param("cart_client_no", "1")
+			.param("cart_user_no", "1")
 			.param("cart_opt_full_detail_no", "1")
 			.contentType(MediaType.APPLICATION_JSON));
 			
@@ -129,12 +129,12 @@ public class CartControllerTest {
 	public void testGetList() throws Exception {
 		ResultActions resultActions;
 		
-		long client_no = 1L;
+		long user_no = 1L;
 		
 		resultActions =				
 			mockMvc
 			.perform(get("/api/cart/get/list")
-			.contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(client_no)))
+			.contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(user_no)))
 			.andDo(print());
 	}
 	

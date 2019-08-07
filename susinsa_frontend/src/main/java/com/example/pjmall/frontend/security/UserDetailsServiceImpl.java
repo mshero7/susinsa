@@ -12,25 +12,29 @@ import org.springframework.stereotype.Component;
 import com.example.pjmall.frontend.repository.UserDao;
 import com.example.pjmall.frontend.vo.UserVo;
 
+
+
+
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	@Autowired
 	private UserDao userDao;
-
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		UserVo userVo = userDao.get(email);
+	
+	@Override
+	public UserDetails loadUserByUsername(String user_id) throws UsernameNotFoundException {
+		UserVo userVo = userDao.get(user_id);
 		
 		SecurityUser securityUser = new SecurityUser();
 		
 		if(userVo != null) {
-			securityUser.setNo(userVo.getNo());
-			securityUser.setName(userVo.getName());
-			securityUser.setUsername(userVo.getEmail());
-			securityUser.setPassword(userVo.getPassword());
-			securityUser.setAuthorities(Arrays.asList(new SimpleGrantedAuthority(userVo.getRole())));
+			securityUser.setNo(userVo.getUser_no());
+			securityUser.setName(userVo.getUser_name());
+			securityUser.setUsername(userVo.getUser_id());
+			securityUser.setPassword(userVo.getUser_password());
+			securityUser.setAuthorities(Arrays.asList(new SimpleGrantedAuthority(userVo.getUser_role())));
 		}
 		
 		return securityUser;
-	}
+	}	
 }

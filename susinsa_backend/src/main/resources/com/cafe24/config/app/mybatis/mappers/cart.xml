@@ -7,7 +7,7 @@
 			insert into CART values(
 			null,
 			#{cart_count},
-			#{cart_client_no},
+			#{cart_user_no},
 			#{cart_opt_full_detail_no});
 		]]>
 	</insert>
@@ -31,16 +31,16 @@
 	<select id="getlist" parameterType="long" resultType="cartdto">
 		select d.product_name, d.product_price, b.opt_full_detail_name, b.opt_full_detail_extra, a.cart_count
 		from
-		CART a, OPT_FULL_DETAIL b, CLIENT c, PRODUCT d
+		CART a, OPT_FULL_DETAIL b, USER c, PRODUCT d
 		where a.cart_opt_full_detail_no = b.opt_full_detail_no
 		and b.opt_full_detail_product_no = d.product_no
-		and c.client_no = #{client_no};
+		and c.user_no = #{user_no};
 	</select>
 	
 	<select id="get_p_list" parameterType="list" resultType="cartdto">
 		select d.product_name, d.product_price, b.opt_full_detail_name, b.opt_full_detail_extra, a.cart_count
 		from
-		CART a, OPT_FULL_DETAIL b, CLIENT c, PRODUCT d
+		CART a, OPT_FULL_DETAIL b, USER c, PRODUCT d
 		where a.cart_opt_full_detail_no = b.opt_full_detail_no
 		and b.opt_full_detail_product_no = d.product_no
 		and a.cart_no =

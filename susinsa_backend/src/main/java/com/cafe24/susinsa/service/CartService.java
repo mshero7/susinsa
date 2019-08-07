@@ -14,8 +14,8 @@ public class CartService {
 	@Autowired
 	private CartDao dao;
 
-	public Boolean add(long cart_count, long cart_client_no, long cart_opt_full_detail_no) {
-		return dao.add(cart_count, cart_client_no, cart_opt_full_detail_no);
+	public Boolean add(long cart_count, long cart_user_no, long cart_opt_full_detail_no) {
+		return dao.add(cart_count, cart_user_no, cart_opt_full_detail_no);
 	}
 
 	public Boolean delete(List<Long> cart_no_list) {
@@ -26,8 +26,8 @@ public class CartService {
 		return dao.modify(cart_no, cart_count);
 	}
 
-	public List<CartDTO> getlist(long cart_client_no) {
-		return dao.getlist(cart_client_no);
+	public List<CartDTO> getlist(long cart_user_no) {
+		return dao.getlist(cart_user_no);
 	}
 
 	public List<CartDTO> get_p_list(List<Long> cart_no_list) {

@@ -9,7 +9,7 @@
 			AES_ENCRYPT(#{shipping_zip1}, SHA2(#{enc_key}, 512)),
 			AES_ENCRYPT(#{shipping_zip2}, SHA2(#{enc_key}, 512)),
 			AES_ENCRYPT(#{shipping_zip3}, SHA2(#{enc_key}, 512)),
-			#{shipping_client_no});
+			#{shipping_user_no});
 		]]>
 	</insert>
 

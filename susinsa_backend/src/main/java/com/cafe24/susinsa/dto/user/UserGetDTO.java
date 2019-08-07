@@ -1,16 +1,10 @@
 package com.cafe24.susinsa.dto.user;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.cafe24.susinsa.validator.constraints.ValidID;
-
-public class UserCheckIdDTO {
-	@NotEmpty(message = "아이디는 필수 입니다.")
-	@ValidID
+public class UserGetDTO {
 	public String user_id;
 	public String enc_key;
 	
-	public UserCheckIdDTO() {
+	public UserGetDTO() {
 		
 	}
 
@@ -32,8 +26,13 @@ public class UserCheckIdDTO {
 
 	@Override
 	public String toString() {
-		return "UserCheckIdDTO [user_id=" + user_id + ", enc_key=" + enc_key + "]";
+		return "UserGetDTO [user_id=" + user_id + ", enc_key=" + enc_key + "]";
 	}
-	
+
+	public UserGetDTO(String user_id, String enc_key) {
+		super();
+		this.user_id = user_id;
+		this.enc_key = enc_key;
+	}
 
 }

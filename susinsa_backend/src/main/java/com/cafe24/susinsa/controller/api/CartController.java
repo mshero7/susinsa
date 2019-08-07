@@ -34,13 +34,13 @@ public class CartController {
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public ResponseEntity<JSONResult> add(
 					@RequestParam long cart_count, 
-					@RequestParam long cart_client_no,
+					@RequestParam long cart_user_no,
 					@RequestParam long cart_opt_full_detail_no) {
 		System.out.println(cart_count);
-		System.out.println(cart_client_no);
+		System.out.println(cart_user_no);
 		System.out.println(cart_opt_full_detail_no);
 		
-		Boolean results = cartService.add(cart_count, cart_client_no, cart_opt_full_detail_no);
+		Boolean results = cartService.add(cart_count, cart_user_no, cart_opt_full_detail_no);
 
        return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(results));
 	}
@@ -71,9 +71,9 @@ public class CartController {
 	@ApiOperation(value="전체 카트리스트를 가져옵니다.")	
 	@RequestMapping(value="/get/list", method=RequestMethod.GET)
 	public ResponseEntity<JSONResult> getlist(
-			@RequestBody long cart_client_no){
-		System.out.println(cart_client_no);
-		List<CartDTO> results = cartService.getlist(cart_client_no);
+			@RequestBody long cart_user_no){
+		System.out.println(cart_user_no);
+		List<CartDTO> results = cartService.getlist(cart_user_no);
 		System.out.println("results : " + results);
        return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(results));
 	}

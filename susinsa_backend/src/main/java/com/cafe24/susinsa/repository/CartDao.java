@@ -17,10 +17,10 @@ public class CartDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public Boolean add(long cart_count, long cart_client_no, long cart_opt_full_detail_no) {
+	public Boolean add(long cart_count, long cart_user_no, long cart_opt_full_detail_no) {
 		Map<String, Long> map = new HashMap<String, Long>();
 		map.put("cart_count", cart_count);
-		map.put("cart_client_no", cart_client_no);
+		map.put("cart_user_no", cart_user_no);
 		map.put("cart_opt_full_detail_no", cart_opt_full_detail_no);
 		
 		int result = sqlSession.insert(NAMESPACE + ".add", map);
@@ -41,8 +41,8 @@ public class CartDao {
 		return null;
 	}
 
-	public List<CartDTO> getlist(long cart_client_no) {
-		List<CartDTO> result = sqlSession.selectList(NAMESPACE + ".getlist", cart_client_no);
+	public List<CartDTO> getlist(long cart_user_no) {
+		List<CartDTO> result = sqlSession.selectList(NAMESPACE + ".getlist", cart_user_no);
 		return result;
 	}
 

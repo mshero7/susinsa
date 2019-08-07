@@ -71,7 +71,7 @@ public class ShippingControllerTest {
 		vo.setShipping_zip1("03325");
 		vo.setShipping_zip2("서울특별시 은평구 갈현로19길 13-7");
 		vo.setShipping_zip3("301호");
-		vo.setShipping_client_no(1L);
+		vo.setShipping_user_no(1L);
 		
 		resultActions =
 			mockMvc
@@ -94,7 +94,7 @@ public class ShippingControllerTest {
 		vo.setShipping_zip1("03325");
 		vo.setShipping_zip2("서울특별시 은평구 갈현로19길 13-7");
 		vo.setShipping_zip3("301호2222222222222");
-		vo.setShipping_client_no(1L);
+		vo.setShipping_user_no(1L);
 		
 		resultActions =
 			mockMvc

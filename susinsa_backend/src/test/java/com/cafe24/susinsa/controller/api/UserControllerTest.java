@@ -69,9 +69,9 @@ public class UserControllerTest {
 		
 		resultActions = mockMvc
 				.perform(get("/api/user/join/check")
-				.param("name", "문상수1")
-				.param("phone", "010-2526-7336")
-				.param("enc_key", CORRECT_ENC_KEY)
+				.param("user_name", "문상수")
+				.param("user_phone", "010-2526-7336")
+				.param("user_enc_key", CORRECT_ENC_KEY)
 				.contentType(MediaType.APPLICATION_JSON));
 		
 		// 무조건 OK가 나고 데이터베이스에 갔다와야 알수있는거아닐까
@@ -90,7 +90,7 @@ public class UserControllerTest {
 		
 		resultActions = mockMvc
 				.perform(get("/api/user/join/check/id")
-				.param("id", "test@naver.com")
+				.param("user_id", "test@naver.com")
 				.param("enc_key", CORRECT_ENC_KEY)
 				.contentType(MediaType.APPLICATION_JSON));
 		
@@ -109,12 +109,13 @@ public class UserControllerTest {
 		// Normal User's Join Data
 		resultActions = mockMvc
 			.perform(post("/api/user/join")
-				.param("id", "test@naver.com")
-				.param("password", "Rmeofhek12!@")
-				.param("name", "문상수")
-				.param("gender", "M")
-				.param("phone", "010-2526-7336")
-				.param("date", "")
+				.param("user_id", "test@naver.com")
+				.param("user_password", "Rmeofhek12!@")
+				.param("user_name", "문상수")
+				.param("user_gender", "M")
+				.param("user_phone", "010-2526-7336")
+				.param("user_date", "")
+				.param("user_role", "ROLE_USER")
 				.param("enc_key", CORRECT_ENC_KEY)
 			.contentType(MediaType.APPLICATION_JSON));
 			
@@ -150,13 +151,28 @@ public class UserControllerTest {
 	public void testUserLogin() throws Exception {
 		UserLoginDTO dto = new UserLoginDTO();
 		
-		dto.setClient_id("test@naver.com");
-		dto.setClient_password("test12!@");
+		dto.setUser_id("test@naver.com");
+		dto.setUser_password("test12!@");
 		
 		ResultActions resultActions = 
 				mockMvc
 					.perform(get("/api/user/login")
 					.contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(dto)));
+		
+		resultActions.andExpect(status().isOk())
+		.andDo(print())
+		.andExpect(jsonPath("$.result", is("success")));
+	}
+	
+	// 5. 정보 가져오기
+	@Test
+	public void testUserGet() throws Exception {
+		String user_id = "test@naver.com";
+		
+		ResultActions resultActions = 
+				mockMvc
+					.perform(get("/api/user/get")
+					.contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(user_id)));
 		
 		resultActions.andExpect(status().isOk())
 		.andDo(print())

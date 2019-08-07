@@ -1,4 +1,4 @@
-package com.cafe24.susinsa.vo;
+package com.example.pjmall.frontend.vo;
 
 public class CartVo {
 	private long cart_no;

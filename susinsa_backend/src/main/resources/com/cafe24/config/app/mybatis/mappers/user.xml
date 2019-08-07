@@ -4,37 +4,47 @@
 <mapper namespace="user">
 	<select id="existUserCheck" parameterType="uservo" resultType="int">
 		<![CDATA[
-			select count(*) from CLIENT where 
-			client_name = AES_ENCRYPT(#{name}, SHA2(#{enc_key}, 512))
+			select count(*) from USER where 
+			user_name = AES_ENCRYPT(#{user_name}, SHA2(#{enc_key}, 512))
 			and
-			client_phone = AES_ENCRYPT(#{phone}, SHA2(#{enc_key}, 512));
+			user_phone = AES_ENCRYPT(#{user_phone}, SHA2(#{enc_key}, 512));
 		]]>
 	</select>
 	
 	<select id="existId" parameterType="uservo" resultType="int">
 		<![CDATA[
-			select count(*) from CLIENT where 
-			client_id = AES_ENCRYPT(#{id}, SHA2(#{enc_key}, 512));
+			select count(*) from USER where 
+			user_id = AES_ENCRYPT(#{user_id}, SHA2(#{enc_key}, 512));
 		]]>
 	</select>
 	
 	<insert id="join" parameterType="uservo">
 		<![CDATA[
-			insert into CLIENT values(
+			insert into USER values(
 				null,
-			    AES_ENCRYPT(#{id}, SHA2(#{enc_key}, 512)),
-			    AES_ENCRYPT(#{password}, SHA2(#{enc_key}, 512)),
-			    AES_ENCRYPT(#{name}, SHA2(#{enc_key}, 512)),
-			    'M',
-			    AES_ENCRYPT(#{phone}, SHA2(#{enc_key}, 512)),
-			    now());
+			    AES_ENCRYPT(#{user_id}, SHA2(#{enc_key}, 512)),
+			    AES_ENCRYPT(#{user_password}, SHA2(#{enc_key}, 512)),
+			    AES_ENCRYPT(#{user_name}, SHA2(#{enc_key}, 512)),
+			    #{user_gender},
+			    AES_ENCRYPT(#{user_phone}, SHA2(#{enc_key}, 512)),
+			    now(),
+			    #{user_role});
 		]]>
 	</insert>
 	
 	<select id="login" parameterType="uservo" resultType="int">
 		select count(*)
-		from CLIENT
-	    where client_id= AES_ENCRYPT(#{client_id}, SHA2(#{enc_key}, 512))
-	    and client_password =  AES_ENCRYPT(#{client_password}, SHA2(#{enc_key}, 512));
+		from USER
+	    where user_id= AES_ENCRYPT(#{user_id}, SHA2(#{enc_key}, 512))
+	    and user_password =  AES_ENCRYPT(#{user_password}, SHA2(#{enc_key}, 512));
+	</select>
+	
+	<select id="get" parameterType="uservo" resultType="useridpwdto">
+		select 
+			user_no,
+			convert(AES_DECRYPT(user_id, SHA2(#{enc_key}, 512))using utf8) as user_id,
+			convert(AES_DECRYPT(user_password, SHA2(#{enc_key}, 512))using utf8) as user_password
+		from USER 
+		where user_id = AES_ENCRYPT(#{user_id}, SHA2(#{enc_key}, 512));
 	</select>
 </mapper>

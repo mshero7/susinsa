@@ -1,4 +1,4 @@
-package com.cafe24.susinsa.vo;
+package com.example.pjmall.frontend.vo;
 
 public class ShippingVo {
 	public long shipping_no;
