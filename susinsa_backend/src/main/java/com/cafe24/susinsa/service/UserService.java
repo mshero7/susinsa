@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.cafe24.susinsa.dto.user.UserCheckDTO;
 import com.cafe24.susinsa.dto.user.UserCheckIdDTO;
+import com.cafe24.susinsa.dto.user.UserIdPwDTO;
 import com.cafe24.susinsa.dto.user.UserLoginDTO;
 import com.cafe24.susinsa.repository.UserDao;
 import com.cafe24.susinsa.vo.UserVo;
@@ -29,5 +30,9 @@ public class UserService {
 
 	public Boolean login(UserLoginDTO dto) {
 		return userDao.login(dto);
+	}
+
+	public UserIdPwDTO get(String user_id) {
+		return userDao.get(user_id);
 	}
 }

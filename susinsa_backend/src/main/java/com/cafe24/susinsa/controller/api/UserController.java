@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cafe24.susinsa.dto.JSONResult;
 import com.cafe24.susinsa.dto.user.UserCheckDTO;
 import com.cafe24.susinsa.dto.user.UserCheckIdDTO;
+import com.cafe24.susinsa.dto.user.UserIdPwDTO;
 import com.cafe24.susinsa.dto.user.UserLoginDTO;
 import com.cafe24.susinsa.service.UserService;
 import com.cafe24.susinsa.vo.UserVo;
@@ -71,17 +73,16 @@ public class UserController {
 	// 3. 회원가입
 	@ApiOperation(value="회원 가입")
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public ResponseEntity<JSONResult> join(	@ModelAttribute @Valid UserVo userVo, BindingResult result ) {
-		
+	public ResponseEntity<JSONResult> join(	@RequestBody @Valid UserVo userVo, BindingResult result ) {
+
 		if( result.hasErrors() ) {
 			List<ObjectError> list = result.getAllErrors();
 			for(ObjectError error : list) {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(JSONResult.fail(error.getDefaultMessage())); 
-			}
+			} 
 		}
 		
 		Boolean results = userService.join(userVo);
-		
        return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(results));
 	}
 	
@@ -93,6 +94,16 @@ public class UserController {
 		JSONResult result = JSONResult.success(exist);
 
        return result;
+	}
+	
+	// 5. 회원 아이디로 정보 가져오기
+	@ApiOperation(value="회원 로그인")
+	@RequestMapping(value="/get", method=RequestMethod.GET)
+	public ResponseEntity<JSONResult> get(@RequestParam String user_id) {
+		System.out.println(user_id);
+		UserIdPwDTO dto = userService.get(user_id);
+
+		return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(dto));
 	}
 	
 //	// 5. 회원 정보 수정

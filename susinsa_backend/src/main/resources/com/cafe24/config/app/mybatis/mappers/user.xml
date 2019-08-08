@@ -39,12 +39,14 @@
 	    and user_password =  AES_ENCRYPT(#{user_password}, SHA2(#{enc_key}, 512));
 	</select>
 	
-	<select id="get" parameterType="uservo" resultType="useridpwdto">
+	<select id="get" parameterType="string" resultType="useridpwdto">
 		select 
 			user_no,
-			convert(AES_DECRYPT(user_id, SHA2(#{enc_key}, 512))using utf8) as user_id,
-			convert(AES_DECRYPT(user_password, SHA2(#{enc_key}, 512))using utf8) as user_password
+			convert(AES_DECRYPT(user_id, SHA2("aa", 512))using utf8) as user_id,
+			convert(AES_DECRYPT(user_password, SHA2("aa", 512))using utf8) as user_password,
+			convert(AES_DECRYPT(user_name, SHA2("aa", 512))using utf8) as user_name,
+			user_role
 		from USER 
-		where user_id = AES_ENCRYPT(#{user_id}, SHA2(#{enc_key}, 512));
+		where user_id = AES_ENCRYPT(#{user_id}, SHA2("aa", 512));
 	</select>
 </mapper>

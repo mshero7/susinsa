@@ -1,6 +1,7 @@
 package com.example.pjmall.frontend.security;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -35,7 +37,7 @@ public class CustomUrlAuthenticationSuccessHandler extends SimpleUrlAuthenticati
         }
 
 		String accept = request.getHeader( "accept" );
-    	
+    	System.out.println("Authenti SuccessHandelr===================================");
 		SecurityUser securityUser = null;
 		if (SecurityContextHolder.getContext().getAuthentication() != null) {
 			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -44,10 +46,18 @@ public class CustomUrlAuthenticationSuccessHandler extends SimpleUrlAuthenticati
 			}
 		}
 		
-		
     	if( accept == null || accept.matches( ".*application/json.*" ) == false ) {
-    		request.getSession(true).setAttribute("loginNow", true);
-            getRedirectStrategy().sendRedirect( request, response, "/" );
+    		request.getSession(true).setAttribute("securityUser", securityUser);
+    		
+    		
+    		Iterator<? extends GrantedAuthority> iter = securityUser.getAuthorities().iterator();
+			String role = iter.next().getAuthority(); 
+    		
+    		if(role.equals("ROLE_USER"))
+    			getRedirectStrategy().sendRedirect( request, response, "/" );
+    		else if (role.equals("ROLE_ADMIN"))
+    			getRedirectStrategy().sendRedirect( request, response, "/admin" );
+    		
     		return;
     	}
     	

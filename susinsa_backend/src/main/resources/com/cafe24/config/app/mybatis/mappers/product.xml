@@ -25,9 +25,12 @@
 	 
 	<!-- 전체상품 리스트 보기 -->
 	<!-- 옵션을 제외한 정보들을 가져옴 -->
-	<select id="getProductList" resultMap="productMap">
+	<select id="getProductList" resultType="productimagedto">
 		<![CDATA[
-			select product_name, product_price, product_sale, product_date, product_weight, product_brand_no, product_category_no from PRODUCT;
+			select product_name, product_price, image_upload_name
+			from PRODUCT a, IMAGE b
+			where a.product_no = b.image_product_no
+			and b.image_order = 1;
 		]]>
 	</select>
 	
@@ -110,4 +113,5 @@
 	 		IMAGE where image_product_no = #{product_no} 
 	 	]]>
 	 </select>
-</mapper>
+	 
+	</mapper>

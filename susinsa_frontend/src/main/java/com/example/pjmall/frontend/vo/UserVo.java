@@ -40,9 +40,6 @@ public class UserVo {
 	private String user_role = "ROLE_USER";
 	
 	private String enc_key;
-	
-
-
 
 	@Override
 	public String toString() {

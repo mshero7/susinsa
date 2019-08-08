@@ -21,6 +21,7 @@
 		<c:param name="active" value="shopping" />
 	</c:import>
 	<!-- /.Navigation -->
+	
 	<div class="container">
 		<div class="row">
 			<c:import url='/WEB-INF/views/includes/sidebar.jsp'/>
@@ -61,26 +62,25 @@
 				</div>
 
 				<div class="row">
-					<c:forEach items="${product_list}" var="p_vo" varStatus="status">
+					<c:forEach var="index" begin="0" end="10" step="1">
 						<div class="col-lg-4 col-md-6 mb-4">
-						<div class="card h-100">
-							<!-- 이미지 URL -->
-							<a href="#"><img class="card-img-top"
-								src="http://placehold.it/700x400" alt=""></a>
-							<div class="card-body">
-								<h4 class="card-title">
-									<a href="#">${p_vo.product_name }</a>
-								</h4>
-								<h5>${p_vo.product_price }</h5>
-								<p class="card-text">Comment !!</p>
-							</div>
-							<!-- 별점 -->
-							<div class="card-footer">
-								<small class="text-muted">&#9733; &#9733; &#9733;
-									&#9733; &#9734;</small>
+							<div class="card h-100">
+								<a href="#"><img class="card-img-top"
+									src="http://placehold.it/700x400" alt=""></a>
+								<div class="card-body">
+									<h4 class="card-title">
+										<a href="${pageContext.servletContext.contextPath }/goods/${index }">Item One</a>
+									</h4>
+									<h5>$24.99</h5>
+									<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+										adipisicing elit. Amet numquam aspernatur!</p>
+								</div>
+								<div class="card-footer">
+									<small class="text-muted">&#9733; &#9733; &#9733;
+										&#9733; &#9734;</small>
+								</div>
 							</div>
 						</div>
-					</div>
 					</c:forEach>
 				</div>
 				<!-- /.row -->

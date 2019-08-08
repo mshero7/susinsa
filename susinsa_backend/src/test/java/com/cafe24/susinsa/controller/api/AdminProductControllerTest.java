@@ -78,7 +78,7 @@ public class AdminProductControllerTest {
 		Map<String, Object> productMap = new HashMap<String,Object>();
 		
 		ProductVo productVo = new ProductVo();
-		productVo.setProduct_name("오픈형 카라 반팔티");
+		productVo.setProduct_name("슬림핏 셔츠");
 		productVo.setProduct_price(20000);
 		productVo.setProduct_sale(true);
 		productVo.setProduct_date(null);

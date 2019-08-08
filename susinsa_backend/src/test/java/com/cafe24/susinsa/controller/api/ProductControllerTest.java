@@ -61,7 +61,7 @@ public class ProductControllerTest {
 	public void testGetProduct() throws Exception {
 		ResultActions resultActions; 
 		
-		long product_no = 2L;
+		long product_no = 1L;
 		
 		resultActions = mockMvc
 				.perform(get("/api/product/get/{product_no}",product_no)
@@ -83,8 +83,7 @@ public class ProductControllerTest {
 		
 		resultActions.andExpect(status().isOk())
 //		.andDo(print())
-		.andExpect(jsonPath("$.result", is("success")))
-		.andExpect(jsonPath("$.data", is(true)));
+		.andExpect(jsonPath("$.result", is("success")));
 	}
 	
 	@Test

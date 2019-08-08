@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cafe24.susinsa.dto.product.ProductDTO;
+import com.cafe24.susinsa.dto.product.ProductImageDTO;
 import com.cafe24.susinsa.vo.ProductVo;
 
 @Repository
@@ -38,8 +39,8 @@ public class ProductDao {
 		return result;
 	}
 
-	public List<ProductDTO> getProductList() {
-		List<ProductDTO> result = sqlSession.selectList(NAMESPACE + ".getProductList");
+	public List<ProductImageDTO> getProductList() {
+		List<ProductImageDTO> result = sqlSession.selectList(NAMESPACE + ".getProductList");
 		return result;
 	}
 

@@ -45,9 +45,9 @@ public class UserDao {
 		
 	}
 
-	public UserIdPwDTO get(Map<String, String> params) {
-		
-		return null;
+	public UserIdPwDTO get(String user_id) {
+		UserIdPwDTO dto = sqlSession.selectOne(NAMESPACE + ".get", user_id);
+		return dto;
 	}
 
 }

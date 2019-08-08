@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cafe24.susinsa.dto.JSONResult;
 import com.cafe24.susinsa.dto.product.ProductDTO;
+import com.cafe24.susinsa.dto.product.ProductImageDTO;
 import com.cafe24.susinsa.service.ProductService;
 
 import io.swagger.annotations.ApiOperation;
@@ -35,10 +36,12 @@ public class ProductController {
 	
 	// 1.상품 조회
 	@ApiOperation(value="선택한 상품의 상품상세정보들을 가져온다.")	
-	@RequestMapping(value="/get/product/{product_no}", method=RequestMethod.GET)
+	@RequestMapping(value="/get/{product_no}", method=RequestMethod.GET)
 	public ResponseEntity<JSONResult> getProduct(@PathVariable long product_no) {
+		System.out.println("1=======================================================");
 		ProductDTO product = productService.getProduct(product_no);
-		
+		System.out.println("2======================================================");
+		System.out.println(product);
        return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(product));
 	}
 	
@@ -47,7 +50,7 @@ public class ProductController {
 	@ApiOperation(value="메인 페이지에 보여줄 상품들 목록을 가져온다.")	
 	@RequestMapping(value="/get", method=RequestMethod.GET)
 	public ResponseEntity<JSONResult> getProductList() {
-		List<ProductDTO> product = productService.getProductList();
+		List<ProductImageDTO> product = productService.getProductList();
 		
        return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(product));
 	}

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cafe24.susinsa.dto.product.ProductDTO;
+import com.cafe24.susinsa.dto.product.ProductImageDTO;
 import com.cafe24.susinsa.repository.ProductDao;
 import com.cafe24.susinsa.vo.ProductVo;
 
@@ -31,7 +32,7 @@ public class ProductService {
 		return dao.getProduct(product_no);
 	}
 
-	public List<ProductDTO> getProductList() {
+	public List<ProductImageDTO> getProductList() {
 		return dao.getProductList();
 	}
 

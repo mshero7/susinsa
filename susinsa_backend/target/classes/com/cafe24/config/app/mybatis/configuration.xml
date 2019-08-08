@@ -7,6 +7,7 @@
 		<typeAlias alias="categoryvo" type="com.cafe24.susinsa.vo.CategoryVo"/>
 		<typeAlias alias="productvo" type="com.cafe24.susinsa.vo.ProductVo"/>
 		<typeAlias alias="productdto" type="com.cafe24.susinsa.dto.product.ProductDTO"/>
+		<typeAlias alias="productimagedto" type="com.cafe24.susinsa.dto.product.ProductImageDTO"/>
 		<typeAlias alias="optvo" type="com.cafe24.susinsa.vo.OptVo"/>
 		<typeAlias alias="optdetailvo" type="com.cafe24.susinsa.vo.OptDetailVo"/>
 		<typeAlias alias="optfulldetailvo" type="com.cafe24.susinsa.vo.OptFullDetailVo"/>

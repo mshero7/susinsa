@@ -9,9 +9,7 @@ public class SecurityUser implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 
-	private Long no;
 	private String name;
-
 	private String username;
 	private String password;
 	private Collection<? extends GrantedAuthority> authorities;
@@ -22,12 +20,28 @@ public class SecurityUser implements UserDetails {
 //	private boolean credentialsNonExpired;
 //	private boolean accountNonLocked;
 	
-	public Long getNo() {
-		return no;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNo(Long no) {
-		this.no = no;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+		this.authorities = authorities;
 	}
 
 	public String getName() {
@@ -38,48 +52,28 @@ public class SecurityUser implements UserDetails {
 		this.name = name;
 	}
 
-	public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-		this.authorities = authorities;
-	}
-	
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return authorities;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
 	}
 
-	public String getPassword() {
-		return password;
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
-	public String getUsername() {
-		return username;
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 }

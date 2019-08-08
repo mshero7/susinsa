@@ -172,7 +172,8 @@ public class UserControllerTest {
 		ResultActions resultActions = 
 				mockMvc
 					.perform(get("/api/user/get")
-					.contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(user_id)));
+					.param("user_id", user_id)
+					.contentType(MediaType.APPLICATION_JSON));
 		
 		resultActions.andExpect(status().isOk())
 		.andDo(print())
