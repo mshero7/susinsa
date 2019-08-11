@@ -33,20 +33,15 @@
 						<li data-target="#carouselExampleIndicators" data-slide-to="0"
 							class="active"></li>
 						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 					</ol>
 					<div class="carousel-inner" role="listbox">
 						<div class="carousel-item active">
-							<img class="d-block img-fluid" src="http://placehold.it/900x350"
+							<img class="d-block img-fluid" src="https://static.massimodutti.net/3/static2//media/2018/new-home/women//W-Slider-Jade_6.jpg?201908110215011239996000&impolicy=massimodutti-itxmediumhigh&imwidth=2000"
 								alt="First slide">
 						</div>
 						<div class="carousel-item">
-							<img class="d-block img-fluid" src="http://placehold.it/900x350"
+							<img class="d-block img-fluid" src="https://static.massimodutti.net/3/static2//media/2018/new-home/women//W-Slider-SpecialPrices_6.jpg?201908110215011239996000&impolicy=massimodutti-itxmediumhigh&imwidth=2000"
 								alt="Second slide">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block img-fluid" src="http://placehold.it/900x350"
-								alt="Third slide">
 						</div>
 					</div>
 					<a class="carousel-control-prev" href="#carouselExampleIndicators"
@@ -61,18 +56,19 @@
 				</div>
 
 				<div class="row">
-					<c:forEach items="${product_list}" var="p_vo" varStatus="status">
+					<c:forEach items="${product_list}" var="p_vo" varStatus="status" begin="0" step="1">
 						<div class="col-lg-4 col-md-6 mb-4">
 						<div class="card h-100">
 							<!-- 이미지 URL -->
-							<a href="#"><img class="card-img-top"
-								src="http://placehold.it/700x400" alt=""></a>
+							<a href='${pageContext.servletContext.contextPath }/product/get/${p_vo.product_no }'>
+							<img class="card-img-top" src="${pageContext.servletContext.contextPath }/assets/images/${p_vo.image_upload_name }"></a>
 							<div class="card-body">
 								<h4 class="card-title">
-									<a href="#">${p_vo.product_name }</a>
+									<a href='${pageContext.servletContext.contextPath }/product/get/${p_vo.product_no }'>
+									${p_vo.product_name }</a>
 								</h4>
 								<h5>${p_vo.product_price }</h5>
-								<p class="card-text">Comment !!</p>
+								<p class="card-text">Comment 22!!</p>
 							</div>
 							<!-- 별점 -->
 							<div class="card-footer">

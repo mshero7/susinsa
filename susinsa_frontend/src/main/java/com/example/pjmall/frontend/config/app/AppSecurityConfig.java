@@ -70,13 +70,13 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         // ExceptionHandlingConfigurer
         .and()
         	.exceptionHandling()
-        		.accessDeniedPage("/views/error/404.jsp")
+        		.accessDeniedPage("/views/error/403.jsp")
         
         // RememberMeConfigurer
-        .and()
-        	.rememberMe()
-        		.key("mysite")
-        		.rememberMeParameter("remember-me")
+//        .and()
+//        	.rememberMe()
+//        		.key("mysite")
+//        		.rememberMeParameter("remember-me")
 
         // CSRFConfigurer(Temporary for Test)
         .and()

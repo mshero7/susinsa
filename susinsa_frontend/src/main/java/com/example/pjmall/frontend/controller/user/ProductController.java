@@ -1,4 +1,4 @@
-package com.example.pjmall.frontend.controller;
+package com.example.pjmall.frontend.controller.user;
 
 import java.util.List;
 
@@ -34,6 +34,7 @@ public class ProductController {
 		List<CategoryVo> category_list = categoryService.getList();
 		
 		ProductDTO product = productService.getProductNo(product_no);
+		System.out.println(product);
 		model.addAttribute("category_list", category_list);
 		model.addAttribute("product", product);
 		

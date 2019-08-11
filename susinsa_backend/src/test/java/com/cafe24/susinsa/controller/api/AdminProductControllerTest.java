@@ -71,14 +71,13 @@ public class AdminProductControllerTest {
 	 * 1. 상품입력 테스트
 	 */
 	@Test
-	@Ignore
 	public void testAdd() throws Exception {
 		ResultActions resultActions;
 		
 		Map<String, Object> productMap = new HashMap<String,Object>();
 		
 		ProductVo productVo = new ProductVo();
-		productVo.setProduct_name("슬림핏 셔츠");
+		productVo.setProduct_name("스판 슬랙스");
 		productVo.setProduct_price(20000);
 		productVo.setProduct_sale(true);
 		productVo.setProduct_date(null);

@@ -1,6 +1,7 @@
 package com.example.pjmall.frontend.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.cafe24.susinsa.dto.user.UserIdPwDTO;
 import com.example.pjmall.frontend.dto.JSONResult;
-import com.example.pjmall.frontend.service.CategoryService.Category_List;
 import com.example.pjmall.frontend.vo.UserVo;
 
 @Service
@@ -33,9 +33,16 @@ public class UserService {
 		return userIdPw.getData();
 	}
 	
+	public List<UserVo> getList() {
+		System.out.println("====1=====================================");
+		UserList userList = 
+				restTemplate.getForObject(BASE_URL + "/getlist", UserList.class);
+		System.out.println("====2=====================================");
+		System.out.println(userList.getData());
+		return userList.getData();
+	}
+	
 	public Boolean join(UserVo userVo) {
-//		MappingJacksonValue value = new MappingJacksonValue(userVo);
-		
 		HttpEntity<UserVo> entity = new HttpEntity<>(userVo); 
 		 
 		ResponseEntity<UserJoin> response = restTemplate
@@ -48,5 +55,6 @@ public class UserService {
 	
 	public static class UserIdPw extends JSONResult<UserIdPwDTO>{ }
 	
+	public static class UserList extends JSONResult<List<UserVo>>{ }
 	
 }

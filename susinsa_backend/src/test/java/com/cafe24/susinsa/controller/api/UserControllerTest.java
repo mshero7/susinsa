@@ -180,6 +180,19 @@ public class UserControllerTest {
 		.andExpect(jsonPath("$.result", is("success")));
 	}
 
+	// 6. 전체 회원정보 가져오기
+	@Test
+	public void testUserGetList() throws Exception {
+		
+		ResultActions resultActions = 
+				mockMvc
+					.perform(get("/api/user/getlist")
+					.contentType(MediaType.APPLICATION_JSON));
+		
+		resultActions.andExpect(status().isOk())
+		.andDo(print())
+		.andExpect(jsonPath("$.result", is("success")));
+	}
 	// 5. 회원정보 수정
 //	@Test
 //	public void testUserUpdateInfo() throws Exception {

@@ -1,5 +1,7 @@
 package com.cafe24.susinsa.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +36,9 @@ public class UserService {
 
 	public UserIdPwDTO get(String user_id) {
 		return userDao.get(user_id);
+	}
+
+	public List<UserVo> getlist() {
+		return userDao.getlist();
 	}
 }

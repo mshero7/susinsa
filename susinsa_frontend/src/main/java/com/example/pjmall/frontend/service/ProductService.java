@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.cafe24.susinsa.dto.product.ProductDTO;
+import com.cafe24.susinsa.dto.product.ProductImageDTO;
 import com.example.pjmall.frontend.dto.JSONResult;
-import com.example.pjmall.frontend.vo.ProductVo;
 
 @Service
 public class ProductService {
@@ -19,7 +19,7 @@ public class ProductService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	public List<ProductVo> getList() {
+	public List<ProductImageDTO> getList() {
 		Product_List product_list = restTemplate.getForObject(BASE_URL + "/get", Product_List.class);
 		System.out.println(product_list.getData());
 		return product_list.getData();
@@ -34,7 +34,7 @@ public class ProductService {
 		return product.getData();
 	}
 	
-	public static class Product_List extends JSONResult<List<ProductVo>>{
+	public static class Product_List extends JSONResult<List<ProductImageDTO>>{
 		
 	}
 	

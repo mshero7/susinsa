@@ -8,13 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cafe24.susinsa.dto.JSONResult;
 import com.cafe24.susinsa.dto.product.ProductDTO;
 import com.cafe24.susinsa.dto.product.ProductImageDTO;
 import com.cafe24.susinsa.service.ProductService;
+import com.cafe24.susinsa.vo.ProductVo;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -38,9 +38,7 @@ public class ProductController {
 	@ApiOperation(value="선택한 상품의 상품상세정보들을 가져온다.")	
 	@RequestMapping(value="/get/{product_no}", method=RequestMethod.GET)
 	public ResponseEntity<JSONResult> getProduct(@PathVariable long product_no) {
-		System.out.println("1=======================================================");
 		ProductDTO product = productService.getProduct(product_no);
-		System.out.println("2======================================================");
 		System.out.println(product);
        return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(product));
 	}

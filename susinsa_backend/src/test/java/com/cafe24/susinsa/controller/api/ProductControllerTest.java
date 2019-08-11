@@ -82,7 +82,6 @@ public class ProductControllerTest {
 				.contentType(MediaType.APPLICATION_JSON));
 		
 		resultActions.andExpect(status().isOk())
-//		.andDo(print())
 		.andExpect(jsonPath("$.result", is("success")));
 	}
 	

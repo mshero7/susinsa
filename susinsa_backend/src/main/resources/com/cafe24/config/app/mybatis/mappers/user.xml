@@ -49,4 +49,16 @@
 		from USER 
 		where user_id = AES_ENCRYPT(#{user_id}, SHA2("aa", 512));
 	</select>
+	
+	<select id="getlist" resultType="uservo">
+	    select user_no,
+		convert(AES_DECRYPT(user_id, SHA2("aa", 512))using utf8) as user_id,
+		convert(AES_DECRYPT(user_name, SHA2("aa", 512))using utf8) as user_name,
+		user_gender,
+		convert(AES_DECRYPT(user_phone, SHA2("aa", 512))using utf8) as user_phone,
+		user_date
+		from USER
+		where user_role != 'ROLE_ADMIN';;
+	</select>
+	
 </mapper>

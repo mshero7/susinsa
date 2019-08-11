@@ -57,7 +57,6 @@ public class CustomUrlAuthenticationSuccessHandler extends SimpleUrlAuthenticati
     			getRedirectStrategy().sendRedirect( request, response, "/" );
     		else if (role.equals("ROLE_ADMIN"))
     			getRedirectStrategy().sendRedirect( request, response, "/admin" );
-    		
     		return;
     	}
     	

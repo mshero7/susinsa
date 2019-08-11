@@ -17,7 +17,8 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
 
@@ -25,10 +26,9 @@ import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 @Configuration
 @EnableWebMvc
 public class MVCConfig extends WebMvcConfigurerAdapter{
-	//
+	
 	// View Resovler
 	// 뷰리졸버만 만들고 리턴해주면 된다.
-	
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();

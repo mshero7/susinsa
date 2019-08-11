@@ -106,6 +106,15 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(dto));
 	}
 	
+	// 6. 회원 전체 정보 가져오기
+	@ApiOperation(value="회원 전체정보 가져오기")
+	@RequestMapping(value="/getlist", method=RequestMethod.GET)
+	public ResponseEntity<JSONResult> getlist() {
+		List<UserVo> dto = userService.getlist();
+
+		return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(dto));
+	}	
+	
 //	// 5. 회원 정보 수정
 //	@ApiOperation(value="회원 정보 수정")
 //	@RequestMapping(value="/update/{Id}", method=RequestMethod.PUT)

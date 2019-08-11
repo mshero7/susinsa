@@ -1,4 +1,4 @@
-package com.example.pjmall.frontend.controller;
+package com.example.pjmall.frontend.controller.user;
 
 import javax.validation.Valid;
 
@@ -34,13 +34,16 @@ public class UserController {
 	@PostMapping( "/join" )
 	public String join(@ModelAttribute @Valid UserVo userVo,
 			Model model, BindingResult result) {
+		System.out.println("1-====================================");
 		if( result.hasErrors() ) {
 			model.addAllAttributes(result.getModel());
 			return "/user/join";
 		}
+		System.out.println("1-====================================");
+
 		userService.join(userVo);
 		
-		return "user/join";
+		return "user/joinsuccess";
 	}
 	
 }

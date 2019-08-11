@@ -1,5 +1,6 @@
 package com.cafe24.susinsa.repository;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -48,6 +49,11 @@ public class UserDao {
 	public UserIdPwDTO get(String user_id) {
 		UserIdPwDTO dto = sqlSession.selectOne(NAMESPACE + ".get", user_id);
 		return dto;
+	}
+
+	public List<UserVo> getlist() {
+		List<UserVo> list = sqlSession.selectList(NAMESPACE + ".getlist");
+		return list;
 	}
 
 }

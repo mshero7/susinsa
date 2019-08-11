@@ -12,9 +12,8 @@ import com.cafe24.susinsa.config.web.SwaggerConfig;
 @Configuration
 @EnableAspectJAutoProxy
 @EnableWebMvc
-@ComponentScan({"com.cafe24.susinsa.controller"})
-@Import({MVCConfig.class, SwaggerConfig.class})
+@ComponentScan({ "com.cafe24.susinsa.controller" })
+@Import({ MVCConfig.class, SwaggerConfig.class })
 
 public class WebConfig {
-
 }

@@ -24,10 +24,6 @@ public class ProductDao {
 		return list;
 	}
 
-	public boolean add(HashMap<String, Object> productMap) {
-		int result = sqlSession.insert(NAMESPACE + ".add", productMap);
-		return result > 0;
-	}
 
 	public boolean delete(long product_no) {
 		int result = sqlSession.delete(NAMESPACE + ".delete", product_no);
@@ -48,5 +44,15 @@ public class ProductDao {
 		List<ProductDTO> result = sqlSession.selectList(NAMESPACE + ".getProductListByBrandNo", brand_no);
 		return result;
 	}
-	
+
+	public boolean add(HashMap<String, Object> productMap) {
+		int result = sqlSession.insert(NAMESPACE + ".add", productMap);
+		return result > 0;
+	}
+
+
+	public void addProduct(Object object) {
+		ProductVo vo = (ProductVo)object;
+		int result = sqlSession.insert(NAMESPACE + ".addProduct", vo);
+	}
 }

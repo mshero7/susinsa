@@ -15,13 +15,20 @@ import com.cafe24.susinsa.vo.ProductVo;
 public class ProductService {
 	@Autowired
 	private ProductDao dao;
-	
+
 	public List<ProductVo> getList() {
 		return dao.getList();
 	}
 
 	public boolean add(HashMap<String, Object> productMap) {
-		return dao.add(productMap);
+		for (Object key : productMap.keySet()) {
+			if (key.equals("productVo")) {
+				System.out.println("1==========================");
+				dao.addProduct(productMap.get(key));
+			}
+		}
+		return true;
+		
 	}
 
 	public boolean delete(long product_no) {
