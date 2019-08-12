@@ -20,15 +20,16 @@ public class ProductService {
 		return dao.getList();
 	}
 
-	public boolean add(HashMap<String, Object> productMap) {
-		for (Object key : productMap.keySet()) {
-			if (key.equals("productVo")) {
-				System.out.println("1==========================");
-				dao.addProduct(productMap.get(key));
-			}
-		}
-		return true;
+	public boolean add(ProductDTO dto) {
+		ProductVo vo = dto.getProductVo();
 		
+		boolean result1 = dao.addProduct(vo);
+		boolean result2 = dao.addProductImage(vo.getProduct_no(), dto.getList_image());
+		boolean result3 = dao.addProductOpt(dto.getList_opt());
+		boolean result4 = dao.addProductOptDetail(dto.getList_opt_detail());
+		boolean result5 = dao.addProductOptFullDetail(dto.getList_opt_full_detail());
+		
+		return result1 && result2 && result3 && result4 && result5;
 	}
 
 	public boolean delete(long product_no) {

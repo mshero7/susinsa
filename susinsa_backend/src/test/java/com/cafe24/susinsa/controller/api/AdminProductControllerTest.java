@@ -1,14 +1,12 @@
 package com.cafe24.susinsa.controller.api;
 
 import static org.junit.Assert.assertNotNull;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -26,6 +24,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.cafe24.susinsa.config.AppConfig;
 import com.cafe24.susinsa.config.WebConfig;
+import com.cafe24.susinsa.dto.product.ProductDTO;
 import com.cafe24.susinsa.service.ProductService;
 import com.cafe24.susinsa.vo.ImageVo;
 import com.cafe24.susinsa.vo.OptDetailVo;
@@ -74,7 +73,7 @@ public class AdminProductControllerTest {
 	public void testAdd() throws Exception {
 		ResultActions resultActions;
 		
-		Map<String, Object> productMap = new HashMap<String,Object>();
+		ProductDTO dto  = new ProductDTO();
 		
 		ProductVo productVo = new ProductVo();
 		productVo.setProduct_name("스판 슬랙스");
@@ -118,18 +117,18 @@ public class AdminProductControllerTest {
 		list_opt_full_detail.add(new OptFullDetailVo(5L,"화이트/S", true, true, 0, 100, 1L));
 		list_opt_full_detail.add(new OptFullDetailVo(6L,"화이트/M", true, true, 0, 100, 1L));
 		
-		productMap.put("productVo", productVo);
-		productMap.put("list_image", list_image);
-		productMap.put("list_opt", list_opt);
-		productMap.put("list_opt_detail", list_opt_detail);
-		productMap.put("list_opt_full_detail", list_opt_full_detail);
+		dto.setProductVo(productVo);
+		dto.setList_image(list_image);
+		dto.setList_opt(list_opt);
+		dto.setList_opt_detail(list_opt_detail);
+		dto.setList_opt_full_detail(list_opt_full_detail);
 		
-		System.out.println("productTEST " + productMap);
+		System.out.println("productTEST " + dto);
 		
 		resultActions =
 				mockMvc
 				.perform(post("/api/admin/product/add")
-				.contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(productMap)))
+				.contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(dto)))
 				.andExpect(status().isOk())
 				.andDo(print());
 	}

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cafe24.susinsa.dto.JSONResult;
+import com.cafe24.susinsa.dto.product.ProductDTO;
 import com.cafe24.susinsa.service.ProductService;
 
 import io.swagger.annotations.ApiOperation;
@@ -30,28 +31,28 @@ public class AdminProductController {
 	// 1. 상품 추가하기.
 	@ApiOperation(value = "추가시키고 싶은 상품을 입력합니다.")
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public ResponseEntity<JSONResult> productAdd(@RequestBody HashMap<String, Object> productMap, BindingResult bindResult) {
+	public ResponseEntity<JSONResult> productAdd(@RequestBody ProductDTO dto, BindingResult bindResult) {
 		if (bindResult.hasErrors())
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(JSONResult.fail(bindResult.getAllErrors().get(0).getDefaultMessage()));
-
-		boolean result = productService.add(productMap);
+		System.out.println("Controller에서 ProductDTO " + dto.getProductVo());
+		boolean result = productService.add(dto);
 
 		return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(result));
 	}
 
-	// 2. 상품 수정하기.
-	@ApiOperation(value = "수정하고 싶은 상품을 선택해 상품을 수정합니다.")
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public ResponseEntity<JSONResult> productUpdate(@RequestBody HashMap<String, Object> productMap, BindingResult bindResult) {
-		if (bindResult.hasErrors())
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body(JSONResult.fail(bindResult.getAllErrors().get(0).getDefaultMessage()));
-
-		boolean result = productService.add(productMap);
-
-		return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(result));
-	}
+//	// 2. 상품 수정하기.
+//	@ApiOperation(value = "수정하고 싶은 상품을 선택해 상품을 수정합니다.")
+//	@RequestMapping(value = "/update", method = RequestMethod.POST)
+//	public ResponseEntity<JSONResult> productUpdate(@RequestBody HashMap<String, Object> productMap, BindingResult bindResult) {
+//		if (bindResult.hasErrors())
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+//					.body(JSONResult.fail(bindResult.getAllErrors().get(0).getDefaultMessage()));
+//
+//		boolean result = productService.add(productMap);
+//
+//		return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(result));
+//	}
 
 	// 3. 상품 삭제하기.
 	@ApiOperation(value = "삭제하고 싶은 상품을 선택해 삭제합니다.")

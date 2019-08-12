@@ -16,8 +16,7 @@
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
 
 <!-- include libraries(jQuery, bootstrap) -->
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
 <!-- Bootstrap CSS CDN -->
 <link rel="stylesheet"
@@ -29,6 +28,13 @@
 <!-- Scrollbar Custom CSS -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+<!-- Editor - SummerNote -->
+<link
+	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"
+	rel="stylesheet">
+
+
 
 <style type="text/css">
 .table-title {
@@ -129,148 +135,7 @@
 #table1 td .add {
 	display: none;
 }
-</style>
 
-<script>
-	$(document).on("click", "i.del", function() {
-		$(this).parent().remove();
-	});
-	$(document).on("click", "i.del", function() {
-		$(this).parent().remove();
-	});
-	$(function() {
-		$(document).on(
-				"change",
-				".uploadFile",
-				function() {
-					var uploadFile = $(this);
-					var files = !!this.files ? this.files : [];
-					if (!files.length || !window.FileReader)
-						return; // no file selected, or no FileReader support
-
-					if (/^image/.test(files[0].type)) { // only image file
-						var reader = new FileReader(); // instance of the FileReader
-						reader.readAsDataURL(files[0]); // read the local file
-
-						reader.onloadend = function() { // set image data as background of div
-							//alert(uploadFile.closest(".upimage").find('.imagePreview').length);
-							uploadFile.closest(".imgUp").find('.imagePreview')
-									.css("background-image",
-											"url(" + this.result + ")");
-						}
-					}
-
-				});
-	});
-
-	$(document)
-			.ready(
-					function() {
-						$('[data-toggle="tooltip"]').tooltip();
-						var actions = $("table td:last-child").html();
-						// Append table with add row form on add new button click
-						$(".add-new")
-								.click(
-										function() {
-											$(this)
-													.attr("disabled",
-															"disabled");
-											var index = $(
-													"#table1 tr:last-child")
-													.index();
-											var row = '<tr>'
-													+ '<td><input type="text" class="form-control" name="opt_name' + index + '"  id="opt_name' + index + '"></td>'
-													+ '<td><input type="text" class="form-control" name="opt_detail_name' + index + '" id="opt_detail_name' + index + '"></td>'
-													+ '<td>' + actions
-													+ '</td>' + '</tr>';
-											$("#table1").append(row);
-											$("#table1 tbody tr").eq(index + 1)
-													.find(".add, .edit")
-													.toggle();
-											$('[data-toggle="tooltip"]')
-													.tooltip();
-										});
-						// Add row on add button click
-						$(document).on(
-								"click",
-								".add",
-								function() {
-									var empty = false;
-									var input = $(this).parents("tr").find(
-											'input[type="text"]');
-									input.each(function() {
-										if (!$(this).val()) {
-											$(this).addClass("error");
-											empty = true;
-										} else {
-											$(this).removeClass("error");
-										}
-									});
-									$(this).parents("tr").find(".error")
-											.first().focus();
-									if (!empty) {
-										input.each(function() {
-											$(this).parent("td").html(
-													$(this).val());
-										});
-										$(this).parents("tr").find(
-												".add, .edit").toggle();
-										$(".add-new").removeAttr("disabled");
-									}
-								});
-						// Edit row on edit button click
-						$(document).on(
-								"click",
-								".edit",
-								function() {
-									$(this).parents("tr").find(
-											"td:not(:last-child)").each(
-											function() {
-												$(this).html(
-														'<input type="text" class="form-control" value="'
-																+ $(this)
-																		.text()
-																+ '">');
-											});
-									$(this).parents("tr").find(".add, .edit")
-											.toggle();
-									$(".add-new").attr("disabled", "disabled");
-								});
-						// Delete row on delete button click
-						$(document).on("click", ".delete", function() {
-							$(this).parents("tr").remove();
-							$(".add-new").removeAttr("disabled");
-						});
-						$('#option-mixing')
-								.click(
-										function() {
-											var tr = $('#table1 tr');
-											var td = tr.children()
-											var tdArr = new Array();
-											var tdArr2 = new Array();
-											
-											table2.append('<tr><td><select name="type" id="type"><option value="Debit">Debit</option><option value="Credit">Credit</option></select></td><td><select name="accounts" id="accounts"><option value="">SELECT</option><option value="One">One</option><option value="Two">Two</option></select></td><td><input type="text" name="debit_amount" id="debit_amount"/></td><td><input type="text" name="credit_amount" id="credit_amount"/></td><td><a href="#" id="remScnt">Remove</a></td></tr>');
-
-											td.each(function(i){
-												if(i > 9)
-													console.log(td.eq(0).text());
-										    });
-											console.log(td.eq(0).text());
-											
-											return false;
-										});
-
-						//Remove button
-						$(document).on('click', '#remScnt', function() {
-							if (i > 2) {
-								$(this).closest('tr').remove();
-								i--;
-							}
-							return false;
-						});
-					});
-</script>
-<style>
 body {
 	background-color: #f5f5f5;
 }
@@ -339,6 +204,193 @@ body {
 }
 </style>
 
+<!-- 이미지 업로드 -->
+
+
+<script>
+	$(document).on("click", "i.del", function() {
+		$(this).parent().remove();
+	});
+	$(document).on("click", "i.del", function() {
+		$(this).parent().remove();
+	});
+	$(function() {
+		$(document).on(
+				"change",
+				".uploadFile",
+				function() {
+					var uploadFile = $(this);
+					var files = !!this.files ? this.files : [];
+					if (!files.length || !window.FileReader)
+						return; // no file selected, or no FileReader support
+
+					if (/^image/.test(files[0].type)) { // only image file
+						var reader = new FileReader(); // instance of the FileReader
+						reader.readAsDataURL(files[0]); // read the local file
+
+						reader.onloadend = function() { // set image data as background of div
+							//alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+							uploadFile.closest(".imgUp").find('.imagePreview')
+									.css("background-image",
+											"url(" + this.result + ")");
+						}
+					}
+
+				});
+	});
+
+	$(document)
+			.ready(
+					function() {
+						$('[data-toggle="tooltip"]').tooltip();
+						var actions = $("table td:last-child").html();
+						// Append table with add row form on add new button click
+						$(".add-new")
+								.click(
+										function() {
+											$(this)
+													.attr("disabled",
+															"disabled");
+											var index = $(
+													"#table1 tbody tr:last-child")
+													.index();
+											var row = '<tr>'
+													+ '<td class="opt_name"><input type="text" class="form-control" name="opt_name' + index + '"  id="opt_name' + index + '"></td>'
+													+ '<td class="opt_detail_name"><input type="text" class="form-control" name="opt_detail_name' + index + '" id="opt_detail_name' + index + '"></td>'
+													+ '<td>' + actions
+													+ '</td>' + '</tr>';
+											$("#table1").append(row);
+											$("#table1 tbody tr").eq(index + 1)
+													.find(".add, .edit")
+													.toggle();
+											$('[data-toggle="tooltip"]')
+													.tooltip();
+										});
+						// Add row on add button click
+						$(document).on(
+								"click",
+								".add",
+								function() {
+									var empty = false;
+									var input = $(this).parents("tr").find(
+											'input[type="text"]');
+									input.each(function() {
+										if (!$(this).val()) {
+											$(this).addClass("error");
+											empty = true;
+										} else {
+											$(this).removeClass("error");
+										}
+									});
+									$(this).parents("tr").find(".error")
+											.first().focus();
+									if (!empty) {
+										input.each(function() {
+											$(this).parent("td").html(
+													$(this).val());
+										});
+										$(this).parents("tr").find(
+												".add, .edit").toggle();
+										$(".add-new").removeAttr("disabled");
+									}
+								});
+						// Edit row on edit button click
+						$(document).on(
+								"click",
+								".edit",
+								function() {
+									$(this).parents("tr").find(
+											"td:not(:last-child)").each(
+											function() {
+												$(this).html(
+														'<input type="text" class="form-control" value="'
+																+ $(this)
+																		.text()
+																+ '">');
+											});
+									$(this).parents("tr").find(".add, .edit")
+											.toggle();
+									$(".add-new").attr("disabled", "disabled");
+								});
+						// Delete row on delete button click
+						$(document).on("click", ".delete", function() {
+							$(this).parents("tr").remove();
+							$(".add-new").removeAttr("disabled");
+						});
+						$('#option-mixing')
+								.click(
+										function() {
+											var tr = $('#table1 tr');
+											var td = tr.children()
+
+											var opt1;
+											var opt2;
+											var opt3 = new Array();
+
+											// 옵션 설정
+											tr
+													.each(function(index) {
+														var opt_name = $(this)
+																.find(
+																		".opt_name")
+																.html();
+														var opt_detail_name = $(
+																this)
+																.find(
+																		".opt_detail_name")
+																.html();
+														if (opt_name
+																&& opt_detail_name) {
+															if (index == 2) {
+																opt1 = opt_detail_name
+																		.split('/');
+															}
+
+															if (index == 3) {
+																opt2 = opt_detail_name
+																		.split('/');
+															}
+														}
+													});
+
+											// 옵션 조합
+											opt1.forEach(function(item) {
+												opt2.forEach(function(item2) {
+													opt3.push(item + '/'
+															+ item2);
+												});
+											});
+
+											console.log(opt3);
+											
+											var html = '';
+											
+											opt3.forEach(function(item,	index) {
+												console.log(item);
+												console.log(index);
+												html +=	'<tr>';
+												html += '<td name="opt_full_detail_name'+ index +'">';
+												html += item;
+												html +=	'</td>';
+												html += '<td><input type="text" class="form-control" name="opt_full_detail_extra'+ index +'"/></td>';
+												html +=	'<td><input type="text" class="form-control" name="opt_full_detail_stock'+ index +'"/></td>';
+												html += '</tr>';
+											})
+											console.log(html);
+											$('#table2 tbody').append(html);
+											return false;
+										});
+
+						//Remove button
+						$(document).on('click', '#remScnt', function() {
+							if (i > 2) {
+								$(this).closest('tr').remove();
+								i--;
+							}
+							return false;
+						});
+					});
+</script>
 <!-- 옵션 조합 -->
 <script>
 	
@@ -347,7 +399,6 @@ body {
 </head>
 
 <body>
-	ss
 	<div class="wrapper">
 		<!-- Sidebar  -->
 		<c:import url="/WEB-INF/views/admin/includes/sidebar.jsp"></c:import>
@@ -358,12 +409,12 @@ body {
 
 			<h1>상품 추가</h1>
 			<div class="col-md-8 order-md-1">
+				<
 				<form class="needs-validation" novalidate>
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="product_name">상품 이름</label> <input type="text"
-								class="form-control" id="product_name"value=""
-								required>
+								class="form-control" id="product_name" value="" required>
 							<div class="col-md-6 mb-3">
 								<label for="product_price">상품 가격</label>
 								<div class="input-group">
@@ -390,8 +441,8 @@ body {
 									<div class="input-group-prepend">
 										<span class="input-group-text"></span>
 									</div>
-									<input type="text" class="form-control" id="product_category_no"
-										placeholder="" required>
+									<input type="text" class="form-control"
+										id="product_category_no" placeholder="" required>
 								</div>
 							</div>
 							<div class="col-md-6 mb-3">
@@ -406,22 +457,28 @@ body {
 							</div>
 						</div>
 						<br>
-						<div class="col-md-6 mb-3 imgUp">
-							<div class="imagePreview "></div>
-							<label class="btn btn-primary"> Upload<input type="file"
-								class="uploadFile img" value="Upload Photo"
-								style="width: 0px; height: 0px; overflow: hidden;">
-							</label>
-						</div>
-						<!-- col-2 -->
 					</div>
 
+					<!-- 이미지 업로드 -->
 					<div class="mb-3">
-						<label for="address">상품 상세 설명</label> <input type="text"
-							class="form-control" id="address" placeholder="1234 Main St"
-							required>
-						<div class="invalid-feedback">Please enter your shipping
-							address.</div>
+						<h2>
+							<b>이미지 업로드</b>
+						</h2>
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-4 imgUp">
+									<div class="imagePreview"></div>
+									<label class="btn btn-primary"> Upload<input
+										type="file" class="uploadFile img" value="Upload Photo"
+										style="width: 100%; height: 0px; overflow: hidden;">
+									</label>
+								</div>
+								<!-- col-2 -->
+								<a class="fa fa-plus imgAdd"></a>
+							</div>
+							<!-- row -->
+						</div>
+						<!-- container -->
 					</div>
 
 					<div class="mb-3">
@@ -475,7 +532,8 @@ body {
 											</h2>
 										</div>
 										<div class="col-sm-4">
-											<button type="button" id="option-mixing" class="btn btn-info mixing">
+											<button type="button" id="option-mixing"
+												class="btn btn-info mixing">
 												<i class="fa fa-plus"></i> 조합하기
 											</button>
 										</div>
@@ -491,23 +549,22 @@ body {
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>John Doe</td>
-											<td>Administration</td>
-											<td hidden="true">(171) 555-2222</td>
-											<td><a class="add" title="Add" data-toggle="tooltip"><i
-													class="material-icons">&#xE03B;</i></a> <a class="edit"
-												title="Edit" data-toggle="tooltip"><i
-													class="material-icons">&#xE254;</i></a> <a class="delete"
-												title="Delete" data-toggle="tooltip"><i
-													class="material-icons">&#xE872;</i></a></td>
-										</tr>
+										
 									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
-
+					<div class="mb-3">
+						<h2>상품 상세 설명</h2>
+						<div class="form-label-group">
+							<textarea name="detail" id="summernote"
+								placeholder="상품 상세를 입력해주세요." required="required">
+								
+							</textarea>
+							<label for="summernote"></label>
+						</div>
+					</div>
 					<hr class="mb-4">
 					<div class="custom-control custom-checkbox">
 						<input type="checkbox" class="custom-control-input"
@@ -578,10 +635,8 @@ body {
 		</div>
 
 	</div>
-	<!-- jQuery CDN - Slim version (=without AJAX) -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
+	<!-- jQuery CDN - version (=without AJAX) -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<!-- Popper.JS -->
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
@@ -597,6 +652,100 @@ body {
 		src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
 
+	<!-- Editor - SummerNote -->
+	<script
+		src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+
+
+
+	<!-- Summernote -->
+	<script type="text/javascript">
+		$(function() {
+			$('#summernote')
+			.summernote(
+			{
+				height : 600,
+				minHeight : null, // set minimum height of editor
+				maxHeight : null, // set maximum height of editor
+				fontNames : [ '맑은고딕', 'Arial', 'Arial Black',
+						'Comic Sans MS', 'Courier New', ],
+				fontNamesIgnoreCheck : [ '맑은고딕' ],
+				focus : false,
+
+				callbacks : {
+					onImageUpload : function(files, editor,
+							welEditable) {
+						for (var i = files.length - 1; i >= 0; i--) {
+							sendFile(files[i], this);
+						}
+					}
+				}
+
+			});
+		});
+		
+		function sendFile(file, el) {
+			var form_data = new FormData();
+	      	form_data.append('file', file);
+	      	$.ajax({
+	        	data: form_data,
+	        	type: "POST",
+	        	url: "/susinsa_backend/api/file/upload",
+	        	cache: false,
+	        	contentType: false,
+	        	enctype: 'multipart/form-data',
+	        	processData: false,
+	        	success: function(img_name) {
+	          		$(el).summernote('editor.insertImage', img_name);
+	        	},
+	        	error:function(request,status,error){
+	        		console.log(form_data);
+	                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+	      	});
+	    }
+	</script>
+	<script>
+		$(function() {
+			$(".imgAdd")
+					.click(
+							function() {
+								$(this)
+										.closest(".row")
+										.find('.imgAdd')
+										.before(
+												'<div class="col-sm-4 imgUp"><div class="imagePreview"></div><label class="btn btn-primary">Upload<input type="file" class="uploadFile img" value="Upload Photo" style="width:100%;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
+							});
+			$(document).on("click", "i.del", function() {
+				$(this).parent().remove();
+			});
+			$(function() {
+				$(document).on(
+						"change",
+						".uploadFile",
+						function() {
+							var uploadFile = $(this);
+							var files = !!this.files ? this.files : [];
+							if (!files.length || !window.FileReader)
+								return; // no file selected, or no FileReader support
+
+							if (/^image/.test(files[0].type)) { // only image file
+								var reader = new FileReader(); // instance of the FileReader
+								reader.readAsDataURL(files[0]); // read the local file
+
+								reader.onloadend = function() { // set image data as background of div
+									//alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+									uploadFile.closest(".imgUp").find(
+											'.imagePreview').css(
+											"background-image",
+											"url(" + this.result + ")");
+								}
+							}
+
+						});
+			});
+		});
+	</script>
 </body>
 
 </html>

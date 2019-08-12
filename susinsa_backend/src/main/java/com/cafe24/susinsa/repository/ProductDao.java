@@ -1,5 +1,6 @@
 package com.cafe24.susinsa.repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import com.cafe24.susinsa.dto.product.ProductDTO;
 import com.cafe24.susinsa.dto.product.ProductImageDTO;
+import com.cafe24.susinsa.vo.ImageVo;
+import com.cafe24.susinsa.vo.OptDetailVo;
+import com.cafe24.susinsa.vo.OptFullDetailVo;
+import com.cafe24.susinsa.vo.OptVo;
 import com.cafe24.susinsa.vo.ProductVo;
 
 @Repository
@@ -51,8 +56,46 @@ public class ProductDao {
 	}
 
 
-	public void addProduct(Object object) {
-		ProductVo vo = (ProductVo)object;
+	public boolean addProduct(ProductVo vo) {
 		int result = sqlSession.insert(NAMESPACE + ".addProduct", vo);
+		
+		return result > 0;
+	}
+
+
+	public boolean addProductImage(long productNo, ArrayList<ImageVo> list_image) {
+		HashMap <String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		map.put("list_image", list_image);
+		int result = sqlSession.insert(NAMESPACE + ".addProductImage", map);
+		
+		return result > 0;
+	}
+
+
+	public boolean addProductOpt(ArrayList<OptVo> list_opt) {
+		HashMap <String, Object> map = new HashMap<String, Object>();
+		map.put("list_opt",list_opt);
+		int result = sqlSession.insert(NAMESPACE + ".addProductOpt", map);
+		
+		return result > 0;
+	}
+
+
+	public boolean addProductOptDetail(ArrayList<OptDetailVo> list_opt_detail) {
+		HashMap <String, Object> map = new HashMap<String, Object>();
+		map.put("list_opt_detail",list_opt_detail);
+		int result = sqlSession.insert(NAMESPACE + ".addProductOptDetail", map);
+		
+		return result > 0;
+	}
+
+
+	public boolean addProductOptFullDetail(ArrayList<OptFullDetailVo> list_opt_full_detail) {
+		HashMap <String, Object> map = new HashMap<String, Object>();
+		map.put("list_opt_full_detail",list_opt_full_detail);
+		int result = sqlSession.insert(NAMESPACE + ".addProductOptFullDetail", map);
+		
+		return result > 0;
 	}
 }

@@ -33,8 +33,9 @@
 			<div class="col-lg-9">
 
 				<div class="card mt-4">
-					<img class="card-img-top img-fluid"
-						src="http://placehold.it/900x400" alt="">
+				
+					<img class="card-img-top img-fluid">
+					<img class="card-img-top" src="${pageContext.servletContext.contextPath }/assets/images/cloth1.jpg">					
 					<div class="card-body">
 						<h3 class="card-title">${product.product_name}</h3>
 						<h4>${product.product_price }</h4>

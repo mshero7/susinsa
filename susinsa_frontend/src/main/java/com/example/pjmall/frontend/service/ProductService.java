@@ -23,8 +23,6 @@ public class ProductService {
 		Product_List product_list = restTemplate.getForObject(BASE_URL + "/get", Product_List.class);
 		System.out.println(product_list.getData());
 		return product_list.getData();
-		
-		
 	}
 	
 	public ProductDTO getProductNo(long product_no) {

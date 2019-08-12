@@ -4,6 +4,10 @@ public class OptDetailVo {
 	private long opt_detail_no;
 	private String opt_detail_name;
 	private long opt_detail_opt_no;
+	
+	public OptDetailVo() {
+		
+	}
 	@Override
 	public String toString() {
 		return "OptDetailVo [opt_detail_no=" + opt_detail_no + ", opt_detail_name=" + opt_detail_name

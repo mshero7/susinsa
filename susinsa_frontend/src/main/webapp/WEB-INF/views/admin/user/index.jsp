@@ -71,8 +71,8 @@
 							<td>${ vo.user_date}</td>
 							<td><button type="button" class="btn btn-danger">회원
 									삭제</button></td>
-							<td><button type="button" class="btn btn-info">정보
-									제공</button></td>
+							<td><button type="button" class="btn btn-info">카트 정보 확인</button></td>
+							
 						</tr>
 					</c:forEach>
 				</tbody>
