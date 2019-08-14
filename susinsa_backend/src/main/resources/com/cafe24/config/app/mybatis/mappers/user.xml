@@ -11,6 +11,10 @@
 		]]>
 	</select>
 	
+	<delete id="delete" parameterType="long">
+		delete from USER where user_no = #{user_no};
+	</delete>
+	
 	<select id="existId" parameterType="uservo" resultType="int">
 		<![CDATA[
 			select count(*) from USER where 

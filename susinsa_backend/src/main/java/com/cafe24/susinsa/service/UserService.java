@@ -41,4 +41,8 @@ public class UserService {
 	public List<UserVo> getlist() {
 		return userDao.getlist();
 	}
+
+	public boolean delete(long user_no) {
+		return userDao.delete(user_no);
+	}
 }

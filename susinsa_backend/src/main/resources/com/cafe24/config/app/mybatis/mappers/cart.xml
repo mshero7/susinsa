@@ -29,14 +29,14 @@
 	</delete>
 	
 	<select id="getlist" parameterType="long" resultType="cartdto">
-		select d.product_name, d.product_price, b.opt_full_detail_name, b.opt_full_detail_extra, a.cart_count
-		from
-		CART a, OPT_FULL_DETAIL b, USER c, PRODUCT d
-		where a.cart_opt_full_detail_no = b.opt_full_detail_no
-		and b.opt_full_detail_product_no = d.product_no
-		and c.user_no = #{user_no};
+		select product_name, opt_full_detail_name, cart_count, product_price, (product_price*cart_count) as total
+		from USER, CART, OPT_FULL_DETAIL, PRODUCT
+		where user_no = #{cart_user_no}
+		and opt_full_detail_no = cart_opt_full_detail_no
+		and opt_full_detail_product_no = product_no;
 	</select>
 	
+	<!-- 체크박스로 주문할때 -->
 	<select id="get_p_list" parameterType="list" resultType="cartdto">
 		select d.product_name, d.product_price, b.opt_full_detail_name, b.opt_full_detail_extra, a.cart_count
 		from
@@ -47,6 +47,5 @@
 		<foreach collection="list" item="item" separator="or" close=";">
 			#{item}
 		</foreach> 
-		
 	</select>
 </mapper>

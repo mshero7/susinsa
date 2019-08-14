@@ -18,7 +18,6 @@ import com.example.pjmall.frontend.vo.UserVo;
 @Service
 public class UserService {
 	private static final String BASE_URL = "http://localhost:8080/susinsa_backend/api/user";
-		
 	
 	@Autowired
 	private RestTemplate restTemplate;
@@ -50,11 +49,18 @@ public class UserService {
 		
 		return response.getBody().getData();
 	}
+
+	public void delete(long user_no) {
+		HttpEntity<Long> entity = new HttpEntity<>(user_no); 
+		restTemplate.exchange(BASE_URL + "/delete/{user_no}",
+				HttpMethod.DELETE, entity, UserDelete.class);
+	}
 	
 	public static class UserJoin extends JSONResult<Boolean>{ }
 	
 	public static class UserIdPw extends JSONResult<UserIdPwDTO>{ }
 	
 	public static class UserList extends JSONResult<List<UserVo>>{ }
-	
+
+	public static class UserDelete extends JSONResult<Boolean>{ }
 }

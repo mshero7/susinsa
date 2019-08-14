@@ -6,6 +6,14 @@ public class CartDTO {
 	private String opt_full_detail_name;
 	private int opt_full_detail_extra;
 	private int cart_count;
+	private long total;
+	
+	public long getTotal() {
+		return total;
+	}
+	public void setTotal(long total) {
+		this.total = total;
+	}
 	public String getProduct_name() {
 		return product_name;
 	}

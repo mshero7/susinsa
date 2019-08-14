@@ -16,7 +16,8 @@
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
 
 <!-- include libraries(jQuery, bootstrap) -->
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
 <!-- Bootstrap CSS CDN -->
 <link rel="stylesheet"
@@ -362,20 +363,22 @@ body {
 											});
 
 											console.log(opt3);
-											
+
 											var html = '';
-											
-											opt3.forEach(function(item,	index) {
-												console.log(item);
-												console.log(index);
-												html +=	'<tr>';
-												html += '<td name="opt_full_detail_name'+ index +'">';
-												html += item;
-												html +=	'</td>';
-												html += '<td><input type="text" class="form-control" name="opt_full_detail_extra'+ index +'"/></td>';
-												html +=	'<td><input type="text" class="form-control" name="opt_full_detail_stock'+ index +'"/></td>';
-												html += '</tr>';
-											})
+
+											opt3
+													.forEach(function(item,
+															index) {
+														console.log(item);
+														console.log(index);
+														html += '<tr>';
+														html += '<td name="opt_full_detail_name'+ index +'">';
+														html += item;
+														html += '</td>';
+														html += '<td><input type="text" class="form-control" name="opt_full_detail_extra'+ index +'"/></td>';
+														html += '<td><input type="text" class="form-control" name="opt_full_detail_stock'+ index +'"/></td>';
+														html += '</tr>';
+													})
 											console.log(html);
 											$('#table2 tbody').append(html);
 											return false;
@@ -409,13 +412,12 @@ body {
 
 			<h1>상품 추가</h1>
 			<div class="col-md-8 order-md-1">
-				<
 				<form class="needs-validation" novalidate>
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="product_name">상품 이름</label> <input type="text"
 								class="form-control" id="product_name" value="" required>
-							<div class="col-md-6 mb-3">
+							<div>
 								<label for="product_price">상품 가격</label>
 								<div class="input-group">
 									<div class="input-group-prepend">
@@ -425,7 +427,7 @@ body {
 										required>
 								</div>
 							</div>
-							<div class="col-md-6 mb-3">
+							<div>
 								<label for="product_weight">상품 무게</label>
 								<div class="input-group">
 									<div class="input-group-prepend">
@@ -435,28 +437,30 @@ body {
 										placeholder="" required>
 								</div>
 							</div>
-							<div class="col-md-6 mb-3">
-								<label for="product_category_no">상품 카테고리</label>
-								<div class="input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text"></span>
+							<div class="col-mb-3">
+								<div class="btn-group mb-3">
+									<button type="button" class="btn btn-info dropdown-toggle"
+										data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false">상품 카테고리</button>
+									<div class="dropdown-menu">
+										<c:forEach items="${category_list}" var="vo"
+											varStatus="status">
+											<a class="dropdown-item">${vo.category_name}</a>
+										</c:forEach>
 									</div>
-									<input type="text" class="form-control"
-										id="product_category_no" placeholder="" required>
 								</div>
-							</div>
-							<div class="col-md-6 mb-3">
-								<label for="product_brand_no">상품 브랜드</label>
-								<div class="input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text"></span>
+								<div class="btn-group mb-3">
+									<button type="button" class="btn btn-warning dropdown-toggle"
+										data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false">브랜드</button>
+									<div class="dropdown-menu">
+										<a class="dropdown-item">Action</a> <a class="dropdown-item"
+											href="#">Another action</a> <a class="dropdown-item" href="#">Something
+											else here</a>
 									</div>
-									<input type="text" class="form-control" id="product_brand_no"
-										placeholder="Username" required>
 								</div>
 							</div>
 						</div>
-						<br>
 					</div>
 
 					<!-- 이미지 업로드 -->
@@ -549,7 +553,7 @@ body {
 										</tr>
 									</thead>
 									<tbody>
-										
+
 									</tbody>
 								</table>
 							</div>
@@ -558,77 +562,17 @@ body {
 					<div class="mb-3">
 						<h2>상품 상세 설명</h2>
 						<div class="form-label-group">
-							<textarea name="detail" id="summernote"
+							<textarea name="detail" id="summernote" id="product_detail"
 								placeholder="상품 상세를 입력해주세요." required="required">
 								
 							</textarea>
 							<label for="summernote"></label>
 						</div>
 					</div>
-					<hr class="mb-4">
-					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input"
-							id="same-address"> <label class="custom-control-label"
-							for="same-address">Shipping address is the same as my
-							billing address</label>
-					</div>
-					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input" id="save-info">
-						<label class="custom-control-label" for="save-info">Save
-							this information for next time</label>
-					</div>
-					<hr class="mb-4">
 
-					<h4 class="mb-3">Payment</h4>
-
-					<div class="d-block my-3">
-						<div class="custom-control custom-radio">
-							<input id="credit" name="paymentMethod" type="radio"
-								class="custom-control-input" checked required> <label
-								class="custom-control-label" for="credit">Credit card</label>
-						</div>
-						<div class="custom-control custom-radio">
-							<input id="debit" name="paymentMethod" type="radio"
-								class="custom-control-input" required> <label
-								class="custom-control-label" for="debit">Debit card</label>
-						</div>
-						<div class="custom-control custom-radio">
-							<input id="paypal" name="paymentMethod" type="radio"
-								class="custom-control-input" required> <label
-								class="custom-control-label" for="paypal">PayPal</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<label for="cc-name">Name on card</label> <input type="text"
-								class="form-control" id="cc-name" placeholder="" required>
-							<small class="text-muted">Full name as displayed on card</small>
-							<div class="invalid-feedback">Name on card is required</div>
-						</div>
-						<div class="col-md-6 mb-3">
-							<label for="cc-number">Credit card number</label> <input
-								type="text" class="form-control" id="cc-number" placeholder=""
-								required>
-							<div class="invalid-feedback">Credit card number is
-								required</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-3 mb-3">
-							<label for="cc-expiration">Expiration</label> <input type="text"
-								class="form-control" id="cc-expiration" placeholder="" required>
-							<div class="invalid-feedback">Expiration date required</div>
-						</div>
-						<div class="col-md-3 mb-3">
-							<label for="cc-cvv">CVV</label> <input type="text"
-								class="form-control" id="cc-cvv" placeholder="" required>
-							<div class="invalid-feedback">Security code required</div>
-						</div>
-					</div>
-					<br>
 					<hr class="mb-4">
-					<button class="btn btn-primary btn-lg btn-block" type="submit">Continue
-						to check22out</button>
+					<button class="btn btn-primary btn-lg btn-block" type="submit">상품
+						등록</button>
 				</form>
 			</div>
 
@@ -662,48 +606,49 @@ body {
 	<script type="text/javascript">
 		$(function() {
 			$('#summernote')
-			.summernote(
-			{
-				height : 600,
-				minHeight : null, // set minimum height of editor
-				maxHeight : null, // set maximum height of editor
-				fontNames : [ '맑은고딕', 'Arial', 'Arial Black',
-						'Comic Sans MS', 'Courier New', ],
-				fontNamesIgnoreCheck : [ '맑은고딕' ],
-				focus : false,
+					.summernote(
+							{
+								height : 600,
+								minHeight : null, // set minimum height of editor
+								maxHeight : null, // set maximum height of editor
+								fontNames : [ '맑은고딕', 'Arial', 'Arial Black',
+										'Comic Sans MS', 'Courier New', ],
+								fontNamesIgnoreCheck : [ '맑은고딕' ],
+								focus : false,
 
-				callbacks : {
-					onImageUpload : function(files, editor,
-							welEditable) {
-						for (var i = files.length - 1; i >= 0; i--) {
-							sendFile(files[i], this);
-						}
-					}
-				}
+								callbacks : {
+									onImageUpload : function(files, editor,
+											welEditable) {
+										for (var i = files.length - 1; i >= 0; i--) {
+											sendFile(files[i], this);
+										}
+									}
+								}
 
-			});
+							});
 		});
-		
+
 		function sendFile(file, el) {
 			var form_data = new FormData();
-	      	form_data.append('file', file);
-	      	$.ajax({
-	        	data: form_data,
-	        	type: "POST",
-	        	url: "/susinsa_backend/api/file/upload",
-	        	cache: false,
-	        	contentType: false,
-	        	enctype: 'multipart/form-data',
-	        	processData: false,
-	        	success: function(img_name) {
-	          		$(el).summernote('editor.insertImage', img_name);
-	        	},
-	        	error:function(request,status,error){
-	        		console.log(form_data);
-	                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                }
-	      	});
-	    }
+			form_data.append('file', file);
+			$.ajax({
+				data : form_data,
+				type : "POST",
+				url : "/susinsa_backend/api/file/upload",
+				cache : false,
+				contentType : false,
+				enctype : 'multipart/form-data',
+				processData : false,
+				success : function(img_name) {
+					$(el).summernote('editor.insertImage', img_name);
+				},
+				error : function(request, status, error) {
+					console.log(form_data);
+					alert("code:" + request.status + "\n" + "message:"
+							+ request.responseText + "\n" + "error:" + error);
+				}
+			});
+		}
 	</script>
 	<script>
 		$(function() {

@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> 
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -22,6 +24,10 @@
 						<li class="nav-item"><a class="nav-link"
 							href="${pageContext.servletContext.contextPath }">${securityUser.name }님
 								반갑습니다!</a></li>
+						<sec:authorize access="hasRole('ROLE_ADMIN')">
+							<li class="nav-item"><a class="nav-link"
+							href="${pageContext.servletContext.contextPath }/user/logout">관리자 페이지</a></li>
+						</sec:authorize>
 						<li class="nav-item"><a class="nav-link"
 							href="${pageContext.servletContext.contextPath }/user/logout">로그아웃</a>
 						</li>

@@ -70,10 +70,9 @@ public class CartController {
 	// 4. 전체 카트리스트를 가져옵니다.
 	@ApiOperation(value="전체 카트리스트를 가져옵니다.")	
 	@RequestMapping(value="/get/list", method=RequestMethod.GET)
-	public ResponseEntity<JSONResult> getlist(
-			@RequestBody long cart_user_no){
-		System.out.println(cart_user_no);
-		List<CartDTO> results = cartService.getlist(cart_user_no);
+	public ResponseEntity<JSONResult> getlist(@RequestParam long user_no){
+		System.out.println("11=================================");
+		List<CartDTO> results = cartService.getlist(user_no);
 		System.out.println("results : " + results);
        return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(results));
 	}
@@ -88,4 +87,6 @@ public class CartController {
 			
 	       return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(results));
 		}
+		
+	// 6. 회원 정보로 
 }

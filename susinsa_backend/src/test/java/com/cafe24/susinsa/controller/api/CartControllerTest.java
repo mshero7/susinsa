@@ -129,7 +129,7 @@ public class CartControllerTest {
 	public void testGetList() throws Exception {
 		ResultActions resultActions;
 		
-		long user_no = 1L;
+		long user_no = 8L;
 		
 		resultActions =				
 			mockMvc

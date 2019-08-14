@@ -56,4 +56,9 @@ public class UserDao {
 		return list;
 	}
 
+	public boolean delete(long user_no) {
+		int result = sqlSession.delete(NAMESPACE + ".delete", user_no);
+		return result > 0;
+	}
+
 }

@@ -1,6 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
+
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -47,7 +50,7 @@
 		<div id="content">
 			<c:import url="/WEB-INF/views/admin/includes/navigation.jsp" />
 			<h1>회원관리</h1>
-			<table class="table">
+			<table class="table" id="user_table">
 				<thead>
 					<tr>
 						<th scope="col">고유번호</th>
@@ -69,22 +72,66 @@
 							<td>${ vo.user_gender}</td>
 							<td>${ vo.user_phone}</td>
 							<td>${ vo.user_date}</td>
-							<td><button type="button" class="btn btn-danger">회원
-									삭제</button></td>
-							<td><button type="button" class="btn btn-info">카트 정보 확인</button></td>
-							
+							<td><button type="button" class="btn btn-danger"
+									onclick="deleteUser(${vo.user_no});">회원 삭제</button></td>
+							<td><button type="button" id="cartInfo" class="btn btn-info"
+									data-toggle="modal" data-target="#CartInfo"
+									onclick="UserCart(${vo.user_no})">카트 정보 확인</button></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
+			<!-- 회원 장바구니 내역 모달 -->
+			<div class="modal fade bd-example-modal-lg" id="CartInfo"
+				tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3 class="modal-title" id="exampleModalLabel">회원 장바구니 내역</h3>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="container-fluid">
+								<table class="table" id="cart_info_table">
+									<thead>
+										<tr>
+											<th scope="col">번호</th>
+											<th scope="col">상품 이름</th>
+											<th scope="col">옵션 이름</th>
+											<th scope="col">수량</th>
+											<th scope="col">상품 가격</th>
+											<th scope="col">총 가격</th>
+										</tr>
+									</thead>
+
+									<tbody>
+
+									</tbody>
+								</table>
+								<p class="text-right" id="cart_amount"></p>
+								<p class="text-right" id="cart_sum"></p>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
 
 		</div>
 	</div>
+	<!-- 회원 장바구니 내역 모달 끝 -->
 
-	<!-- jQuery CDN - Slim version (=without AJAX) -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
+
+	<!-- jQuery CDN - Slim version -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<!-- Popper.JS -->
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
@@ -110,7 +157,56 @@
 				$('.collapse.in').toggleClass('in');
 				$('a[aria-expanded=true]').attr('aria-expanded', 'false');
 			});
+
+			$("#user_table").on('click', '.btn-danger', function () {
+			    $(this).closest('tr').remove();
+			});
+			
 		});
+		
+		function deleteUser(user_no) {
+			$.ajax({
+				url: "/susinsa_backend/api/admin/user/delete/"+ user_no,
+				type: "DELETE",
+				contentType : "application/json; charset=UTF-8",
+				success: function (data) {
+					alert("삭제 되었습니다.");
+				}
+			});
+		}
+		
+		function UserCart(user_no) {
+			var params = "user_no="+user_no
+			$.ajax({
+				url: "/susinsa_backend/api/cart/get/list",
+				data: params,
+				type: "GET",
+				contentType : "application/json; charset=UTF-8",
+				success: function (data) {
+					var html = '';
+					var amount = 0;
+					var sum = 0;
+					Object.keys(data.data).map(function(objectKey, index) {
+					    var value = data.data[objectKey];
+					    console.log(value);
+					    html += '<tr>';
+					    html += '<td>' + (index+1) + "</td>";
+						html += '<td>' + value.product_name + "</td>";
+						html += '<td>' + value.cart_count + "</td>";
+						html += '<td>' + value.opt_full_detail_name + "</td>";
+						html += '<td>' + value.product_price + "</td>";
+						html += '<td>' + value.total + "</td>";
+						html += '</tr>';
+						amount += value.cart_count;
+						sum += value.total;
+						
+						$('#cart_info_table tbody').append(html);
+					});
+					$('#cart_amount').html("카트 수량 : "+amount); 
+					$('#cart_sum').html("카트 총 금액 : " + sum);
+				}
+			});
+		}
 	</script>
 </body>
 

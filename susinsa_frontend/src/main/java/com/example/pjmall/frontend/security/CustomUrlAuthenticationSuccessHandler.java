@@ -28,7 +28,6 @@ public class CustomUrlAuthenticationSuccessHandler extends SimpleUrlAuthenticati
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-    	
     	SavedRequest savedRequest = requestCache.getRequest( request, response );
         
         if ( savedRequest != null ) {
@@ -37,6 +36,7 @@ public class CustomUrlAuthenticationSuccessHandler extends SimpleUrlAuthenticati
         }
 
 		String accept = request.getHeader( "accept" );
+		
     	System.out.println("Authenti SuccessHandelr===================================");
 		SecurityUser securityUser = null;
 		if (SecurityContextHolder.getContext().getAuthentication() != null) {
@@ -49,7 +49,6 @@ public class CustomUrlAuthenticationSuccessHandler extends SimpleUrlAuthenticati
     	if( accept == null || accept.matches( ".*application/json.*" ) == false ) {
     		request.getSession(true).setAttribute("securityUser", securityUser);
     		
-    		
     		Iterator<? extends GrantedAuthority> iter = securityUser.getAuthorities().iterator();
 			String role = iter.next().getAuthority(); 
     		
@@ -57,6 +56,7 @@ public class CustomUrlAuthenticationSuccessHandler extends SimpleUrlAuthenticati
     			getRedirectStrategy().sendRedirect( request, response, "/" );
     		else if (role.equals("ROLE_ADMIN"))
     			getRedirectStrategy().sendRedirect( request, response, "/admin" );
+    		
     		return;
     	}
     	

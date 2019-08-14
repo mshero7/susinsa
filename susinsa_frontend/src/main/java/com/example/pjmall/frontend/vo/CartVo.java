@@ -5,7 +5,7 @@ public class CartVo {
 	private int cart_count;
 	private long cart_user_no;
 	private long cart_opt_full_detail_no;
-
+	
 	public CartVo() {
 		
 	}

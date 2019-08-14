@@ -6,10 +6,11 @@ public class CartVo {
 	private long cart_user_no;
 	private long cart_opt_full_detail_no;
 
+
 	public CartVo() {
-		
+
 	}
-	
+
 	public long getCart_no() {
 		return cart_no;
 	}
@@ -41,7 +42,6 @@ public class CartVo {
 	public void setCart_opt_full_detail_no(long cart_opt_full_detail_no) {
 		this.cart_opt_full_detail_no = cart_opt_full_detail_no;
 	}
-
 
 	@Override
 	public String toString() {
